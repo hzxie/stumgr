@@ -26,6 +26,7 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->library('lib_accounts');
         $this->load->library('lib_routine');
+        $this->load->library('lib_scores');
         $this->load->library('lib_evaluation');
 
         $session = $this->session->all_userdata();
@@ -300,7 +301,27 @@ class Home extends CI_Controller {
      */
     public function get_data_for_transcripts()
     {
-        
+        $available_years       = $this->lib_scores->get_available_years($this->profile['student_id']);
+        $current_school_year   = $this->lib_scores->get_current_school_year();
+        $data            = array(
+                'available_years'       => ($available_years ? $available_years : 
+                                                               array(array('school_year' => $current_school_year)))
+            );
+        return $data;
+    }
+
+    public function get_transcripts_records($school_year, $semester)
+    {
+        $student_id             = $this->profile['student_id'];
+        $transcripts_records    = array();
+
+        $transcripts_records    = $this->lib_scores->get_transcripts_record_by_students($school_year, $semester, $student_id);
+
+        $result = array(
+                'is_successful' => ($transcripts_records != false),
+                'records'       => $transcripts_records
+            );
+        echo json_encode($result);
     }
 
     /**

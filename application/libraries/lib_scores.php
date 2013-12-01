@@ -23,6 +23,59 @@ class Lib_scores {
     }
 
     /**
+     * Get the current school year in school.
+     * @return the current school year in school
+     */
+    public function get_current_school_year()
+    {
+        $current_month = date('n');
+
+        if ( $current_month >= 8 ) {
+            return date('Y');
+        } else {
+            return (date('Y') - 1);
+        }
+    }
+
+    public function get_all_available_years()
+    {
+        $available_years     = $this->__CI->Scores_model->get_all_available_years();
+        return $available_years;
+    }
+
+    public function get_available_years($student_id)
+    {
+        $available_years     = $this->__CI->Scores_model->get_available_years($student_id);
+        return $available_years;
+    }
+
+    public function get_transcripts_record_by_students($school_year, $semester, $student_id)
+    {
+        $transcripts_records = $this->__CI->Scores_model->select($school_year, $semester, $student_id);
+        if ( $transcripts_records ) {
+            foreach ( $transcripts_records as &$record ) {
+                $record['grade_point'] = $this->get_grade_point($record['final_score'], $record['is_hierarchy'], $record['is_passed']);
+                if ( $record['final_score'] >= 60 ) {
+                    $record['is_passed'] = '';
+                } else {
+                    if ( $record['is_passed'] ) {
+                        $record['is_passed'] = '及格';
+                    } else {
+                        $record['is_passed'] = '不及格';
+                    }
+                }
+                if ( $record['paper_score'] == null ) {
+                    $record['paper_score'] = '';
+                }
+                if ( $record['is_hierarchy'] ) {
+                    $record['final_score'] = $this->get_rank($record['final_score']);
+                }
+            }
+        }
+        return $transcripts_records;
+    }
+
+    /**
      * Import scores from an excel file.
      * @param  String $file_path - the path of the excel file
      * @param  Array  $result - an array contains query flags.
@@ -33,7 +86,7 @@ class Lib_scores {
         $this->__CI->load->library('lib_excel');
         $data = $this->__CI->lib_excel->get_data_from_excel($file_path);
 
-        $number_of_records = count($data);
+        /*$number_of_records = count($data);
         $result['is_query_successful'] = true;
         for ( $i = 1; $i < $number_of_records; ++ $i ) {
             $score = $this->get_scores_array($data[$i]);
@@ -48,7 +101,7 @@ class Lib_scores {
                 $result['success_message']  .= $score['student_name'].'的'.$score['course_name'].'成绩信息未能成功导入.<br />';
             }
         }
-        return $result['is_query_successful'];
+        return $result['is_query_successful'];*/
     }
 
     /**
@@ -131,7 +184,19 @@ class Lib_scores {
 
     private function get_rank($score)
     {
-
+        if ( $score == 95 ) {
+            return '优';
+        } else if ( $score == 85 ) {
+            return '良';
+        } else if ( $score == 70 ) {
+            return '中';
+        } else if ( $score == 60 ) {
+            return '及格';
+        } else if ( $score == 0 ) {
+            return '不及格';
+        } else {
+            return $score;
+        }
     }
 
     /**
