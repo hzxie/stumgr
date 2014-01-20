@@ -1,7 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * The model is for the stumgr_users table in the database.
+ * The model is for the stumgr_sessions table in the database.
  *
  * The structure of stumgr_sessions:
  *     sessions_id			-- VARCHAR(40)	-- NOT NULL --	[PRIMARY]

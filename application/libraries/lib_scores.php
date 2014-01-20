@@ -86,7 +86,7 @@ class Lib_scores {
         $this->__CI->load->library('lib_excel');
         $data = $this->__CI->lib_excel->get_data_from_excel($file_path);
 
-        /*$number_of_records = count($data);
+        $number_of_records = count($data);
         $result['is_query_successful'] = true;
         for ( $i = 1; $i < $number_of_records; ++ $i ) {
             $score = $this->get_scores_array($data[$i]);
@@ -101,7 +101,7 @@ class Lib_scores {
                 $result['success_message']  .= $score['student_name'].'的'.$score['course_name'].'成绩信息未能成功导入.<br />';
             }
         }
-        return $result['is_query_successful'];*/
+        return $result['is_query_successful'];
     }
 
     /**
@@ -115,7 +115,7 @@ class Lib_scores {
                 'is_successful' => false
             );
         $score  = array(
-                'year'          => $score_record['year'],
+                'school_year'   => $score_record['school_year'],
                 'semester'      => $score_record['semester'],
                 'student_id'    => $score_record['student_id'],
                 'course_id'     => $score_record['course_id'],
@@ -139,7 +139,7 @@ class Lib_scores {
     {
         $final_score            =  $this->get_score($record[15]);
         $score = array(
-                'year'          => (int)((int)$record[0] / 2 + 2002),
+                'school_year'   => (int)( ((int)$record[0] - 1) / 2 + 2002),
                 'semester'      => ((int)$record[0] % 2 != 0 ? 1 : 2),
                 'student_id'    => (string)$record[1],
                 'student_name'  => (string)$record[2],
