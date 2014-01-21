@@ -58,7 +58,7 @@ class Scores_model extends CI_Model {
     {
         $this->db->distinct();
         $this->db->select('school_year');
-        $this->db->order_by('school_year', 'asc');
+        $this->db->order_by('school_year', 'desc');
         $query = $this->db->get($this->db->dbprefix('scores'));
         if ( $query->num_rows() > 0 ) {
             return $query->result_array();
@@ -72,7 +72,7 @@ class Scores_model extends CI_Model {
         $this->db->distinct();
         $this->db->select('school_year');
         $this->db->where('student_id', $student_id);
-        $this->db->order_by('school_year', 'asc');
+        $this->db->order_by('school_year', 'desc');
 
         $query = $this->db->get($this->db->dbprefix('scores'));
         if ( $query->num_rows() > 0 ) {
