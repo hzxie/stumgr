@@ -2,20 +2,22 @@
 	<h1>奖惩情况</h1>
 </div> <!-- /rewards-header -->
 <div id="rewards-content" class="section">
-    <div id="selector" style="float: left;">
-        <select id="available-years" class="span2">
-            <?php
-                foreach ( $available_years as $available_year ) {
-                    $year = $available_year['school_year'];
-                    echo '<option value="'.$year.'">'.$year.'-'.($year + 1).'学年</option>';
-                }
-            ?>
-        </select>
-    </div> <!-- /selector -->
-    <div id="add-new" style="float: right; font-size: 13px;">
-        <img src="<?php echo base_url() ?>public/img/icon-add.png" alt="Icon" />
-        <a id="add-new-trigger" href="javascript:void(0);">添加记录</a>
-    </div> <!-- /add-new -->
+    <div id="rewards-content-header" style="overflow: auto;">
+        <div id="selector" style="float: left;">
+            <select id="available-years" class="span2">
+                <?php
+                    foreach ( $available_years as $available_year ) {
+                        $year = $available_year['school_year'];
+                        echo '<option value="'.$year.'">'.$year.'-'.($year + 1).'学年</option>';
+                    }
+                ?>
+            </select>
+        </div> <!-- /selector -->
+        <div id="add-new" style="float: right; font-size: 13px;">
+            <img src="<?php echo base_url() ?>public/img/icon-add.png" alt="Icon" />
+            <a id="add-new-trigger" href="javascript:void(0);">添加记录</a>
+        </div> <!-- /add-new -->
+    </div> <!-- /rewards-content-header -->
     <div id="list">
         <table id="reward-records" class="table table-striped">
             <thead>
