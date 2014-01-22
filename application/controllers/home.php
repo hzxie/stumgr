@@ -27,6 +27,7 @@ class Home extends CI_Controller {
         $this->load->library('lib_accounts');
         $this->load->library('lib_routine');
         $this->load->library('lib_scores');
+        $this->load->library('lib_rewards');
         $this->load->library('lib_evaluation');
 
         $session = $this->session->all_userdata();
@@ -189,25 +190,25 @@ class Home extends CI_Controller {
 
     /**
      * Handle students' getting attendance records requests.
-     * @param  int    $school_year - the year to query
+     * @param  int    $school_year - the school year to query
      * @param  String $time  - the value is one of ( 'a-week', 'two-weeks'
      *         'a-month', 'all' ), stands for which record to query
      * @param  String $range - the value is one of ( 'myself', 'all' ), 
      *         stands for which record to query
      * @return an array contains attendance records with query flags
      */
-    public function get_attendance_records($year, $time, $range)
+    public function get_attendance_records($school_year, $time, $range)
     {
         $student_id         = $this->profile['student_id'];
         $attendance_records = array();
         if ( $range == 'all' && $this->profile['user_group']['group_name'] == 'Study-Monitors' ) {
-            $attendance_records = $this->lib_routine->get_attendance_records_by_class($year, $time, 
+            $attendance_records = $this->lib_routine->get_attendance_records_by_class($school_year, $time, 
                                                                                       $this->profile['grade'], $this->profile['class'], 'Study');
         } else if ( $range == 'all' && $this->profile['user_group']['group_name'] == 'Sports-Monitors' ) {
-            $attendance_records = $this->lib_routine->get_attendance_records_by_class($year, $time, 
+            $attendance_records = $this->lib_routine->get_attendance_records_by_class($school_year, $time, 
                                                                                       $this->profile['grade'], $this->profile['class'], 'Sports');
         } else {
-            $attendance_records = $this->lib_routine->get_attendance_records_by_students($year, $student_id, 
+            $attendance_records = $this->lib_routine->get_attendance_records_by_students($school_year, $student_id, 
                                                                                          $this->profile['student_name'], $time);
         }
         $result = array(
@@ -272,12 +273,18 @@ class Home extends CI_Controller {
         return $data;
     }
 
-    public function get_hygiene_records($year, $semester)
+    /**
+     * Handle students' getting hygiene records requests.
+     * @param  int $school_year - the school year to query
+     * @param  int $semester - the semester to query
+     * @return an array hygiene records with query flags
+     */
+    public function get_hygiene_records($school_year, $semester)
     {
         $student_id         = $this->profile['student_id'];
         $hygiene_records    = array();
 
-        $hygiene_records    = $this->lib_routine->get_hygiene_records_by_students($year, $semester, $student_id);
+        $hygiene_records    = $this->lib_routine->get_hygiene_records_by_students($school_year, $semester, $student_id);
 
         $result = array(
                 'is_successful' => ($hygiene_records != false),
@@ -310,12 +317,18 @@ class Home extends CI_Controller {
         return $data;
     }
 
+    /**
+     * Handle students' getting transcripts records requests.
+     * @param  int $school_year - the school year to query
+     * @param  int $semester - the semester to query
+     * @return an array transcripts records with query flags
+     */
     public function get_transcripts_records($school_year, $semester)
     {
         $student_id             = $this->profile['student_id'];
         $transcripts_records    = array();
 
-        $transcripts_records    = $this->lib_scores->get_transcripts_record_by_students($school_year, $semester, $student_id);
+        $transcripts_records    = $this->lib_scores->get_transcripts_records_by_students($school_year, $semester, $student_id);
 
         $result = array(
                 'is_successful' => ($transcripts_records != false),
@@ -402,7 +415,52 @@ class Home extends CI_Controller {
      */
     public function get_data_for_rewards()
     {
+        $available_years        = $this->lib_rewards->get_available_years($this->profile['student_id']);
+        $current_school_year    = $this->lib_rewards->get_current_school_year();
+        $reward_levels          = $this->lib_rewards->get_reward_levels();
 
+        $data            = array(
+                'current_school_year'   => $current_school_year,
+                'reward_levels'         => $reward_levels,
+                'available_years'       => ($available_years ? $available_years : 
+                                                               array(array('school_year' => $current_school_year)))
+            );
+        return $data;
+    }
+
+    /**
+     * Handle students' getting reward records requests.
+     * @param  int $school_year - the year to query
+     * @return an array contains reward records with query flags
+     */
+    public function get_reward_records($school_year)
+    {
+        $student_id             = $this->profile['student_id'];
+        $reward_records         = array();
+
+        $reward_records         = $this->lib_rewards->get_reward_records_by_students($school_year, $student_id);
+
+        $result = array(
+                'is_successful' => ($reward_records != false),
+                'records'       => $reward_records
+            );
+        echo json_encode($result);
+    }
+
+    /**
+     * Handle students' adding reward records requests.
+     * @return an array which contains the query flags
+     */
+    public function add_reward_record()
+    {
+        $reward_level_id    = $this->input->post('reward_level_id');
+        $detail             = $this->input->post('detail');
+        $additional_score   = $this->input->post('additional_score');
+
+        $result             = $this->lib_rewards->add_reward_record($this->profile['student_id'], 
+                                                                    $reward_level_id, $detail, $additional_score);
+        
+        var_dump($result);
     }
 
     /**

@@ -44,7 +44,7 @@
 <div id="profile-dialog" class="modal hide dialog">
  	<div class="modal-header">
     	<button type="button" class="close">×</button>
-    	<h3 id="profile-dialog-title">更新联系信息</h3>
+    	<h2 id="profile-dialog-title">更新联系信息</h2>
   	</div>
   	<div class="modal-body">
   		<div id="profile-error-message" class="alert alert-error hide"></div>
@@ -69,7 +69,7 @@
 <div id="password-dialog" class="modal hide dialog">
  	<div class="modal-header">
     	<button type="button" class="close">×</button>
-    	<h3 id="password-dialog-title">更改密码</h3>
+    	<h2 id="password-dialog-title">更改密码</h2>
   	</div>
   	<div class="modal-body">
   		<div id="password-error-message" class="alert alert-error hide"></div>

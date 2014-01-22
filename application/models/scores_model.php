@@ -18,7 +18,17 @@ class Scores_model extends CI_Model {
         $this->load->database();
     }
 
-    public function select($school_year, $semester, $student_id)
+    /**
+     * Insert a record to the scores table.
+     * @param  Array $record - an array contains a score record to insert
+     * @return true if the query is successful
+     */
+    public function insert($record)
+    {
+        return $this->db->insert($this->db->dbprefix('scores'), $record);
+    }
+
+    public function get_transcripts_records_by_students($school_year, $semester, $student_id)
     {
         $scores_table  = $this->db->dbprefix('scores');
         $courses_table = $this->db->dbprefix('courses');
@@ -42,16 +52,6 @@ class Scores_model extends CI_Model {
         } else {
             return false;
         }
-    }
-
-    /**
-     * Insert a record to the scores table.
-     * @param  Array $record - an array contains a score record to insert
-     * @return true if the query is successful
-     */
-    public function insert($record)
-    {
-    	return $this->db->insert($this->db->dbprefix('scores'), $record);
     }
 
     public function get_all_available_years()

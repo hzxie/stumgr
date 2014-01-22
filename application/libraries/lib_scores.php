@@ -37,21 +37,39 @@ class Lib_scores {
         }
     }
 
-    public function get_all_available_years()
-    {
-        $available_years     = $this->__CI->Scores_model->get_all_available_years();
-        return $available_years;
-    }
-
+    /**
+     * Get available years to select from existing data.
+     *
+     * The function is mainly used for students to query their score records 
+     * from the database. So the available years should not earlier than when 
+     * they attend university.
+     *
+     * @param String  student_id - the student id of the student
+     * @return an array contains all available years
+     */
     public function get_available_years($student_id)
     {
-        $available_years     = $this->__CI->Scores_model->get_available_years($student_id);
+        $available_years    = $this->__CI->Scores_model->get_available_years($student_id);
         return $available_years;
     }
 
-    public function get_transcripts_record_by_students($school_year, $semester, $student_id)
+    /**
+     * Get available years to select from existing data.
+     *
+     * The function is mainly used for administrators to get all available
+     * years for score records in the database.
+     * 
+     * @return an array contains all available years
+     */
+    public function get_all_available_years()
     {
-        $transcripts_records = $this->__CI->Scores_model->select($school_year, $semester, $student_id);
+        $available_years    = $this->__CI->Scores_model->get_all_available_years();
+        return $available_years;
+    }
+
+    public function get_transcripts_records_by_students($school_year, $semester, $student_id)
+    {
+        $transcripts_records = $this->__CI->Scores_model->get_transcripts_records_by_students($school_year, $semester, $student_id);
         if ( $transcripts_records ) {
             foreach ( $transcripts_records as &$record ) {
                 $record['grade_point'] = $this->get_grade_point($record['final_score'], $record['is_hierarchy'], $record['is_passed']);

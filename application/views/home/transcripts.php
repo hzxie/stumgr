@@ -40,16 +40,16 @@
     $('#available-years').change(function(){
         var school_year = $(this).val(),
             semester    = $('#available-semesters').val();
-        get_attendance_records(school_year, semester);
+        get_transcripts_records(school_year, semester);
     });
     $('#available-semesters').change(function(){
         var school_year = $('#available-years').val(),
             semester    = $(this).val();
-        get_attendance_records(school_year, semester);
+        get_transcripts_records(school_year, semester);
     });
 </script>
 <script type="text/javascript">
-    function get_attendance_records(school_year, semester) {
+    function get_transcripts_records(school_year, semester) {
         $.ajax({
             type: 'GET',
             async: true,
@@ -97,6 +97,6 @@
     $(document).ready(function(){
         var school_year = $('#available-years').val(),
             semester    = $('#available-semesters').val();
-        get_attendance_records(school_year, semester);
+        get_transcripts_records(school_year, semester);
     })
 </script>

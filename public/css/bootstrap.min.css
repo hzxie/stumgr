@@ -4170,6 +4170,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .alert {
+  font-size: 12px;
   padding: 8px 35px 8px 14px;
   margin-bottom: 20px;
   text-shadow: none;
@@ -4202,7 +4203,6 @@ input[type="submit"].btn.btn-mini {
   background-color: #dff0d8;
   border-color: #a3d48e;
   color: #468847;
-  font-size: 12px;
 }
 
 .alert-success h4 {
@@ -4214,7 +4214,6 @@ input[type="submit"].btn.btn-mini {
   color: #b94a48;
   background-color: #f2dede;
   border-color: #d59595;
-  font-size: 12px;
 }
 
 .alert-danger h4,

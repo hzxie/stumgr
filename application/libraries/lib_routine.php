@@ -114,7 +114,7 @@ class Lib_routine {
      * Get available years to select from existing data.
      *
      * The function is mainly used for administrators to get all available
-     * years for attendance in the database.
+     * years for attendance records in the database.
      * 
      * @return an array contains all available years
      */
@@ -128,7 +128,7 @@ class Lib_routine {
      * Get available years to select from existing data.
      *
      * The function is mainly used for administrators to get all available
-     * years for hygiene in the database.
+     * years for hygiene records in the database.
      * 
      * @return an array contains all available years
      */
