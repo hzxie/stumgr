@@ -94,10 +94,10 @@
                         );
                     }
                     set_visible('#page-error', false);
-                    set_visible('#list', true);
+                    set_visible('#reward-records', true);
                 } else {
                     set_visible('#page-error', true);
-                    set_visible('#list', false);
+                    set_visible('#reward-records', false);
                 }
             }
         });
@@ -114,17 +114,24 @@
     }
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        // loading reward records
-        var school_year = $('#available-years').val();
-        get_reward_records(school_year);
-
-        // add three new lines in new rewards model
-        var NUMBER_OF_LINES = 3;
-        for ( i = 0; i < NUMBER_OF_LINES; ++ i ) {
-            add_new_record();
-        }
-    });
+    function add_new_record() {
+        $('#new-rewards-table').append(
+            '<tr class="no-border">' + 
+            '<td>' + 
+            '<select name="level" style="width: 80px;">' + 
+            '<?php
+                foreach ( $reward_levels as $reward_level ) {
+                    echo '<option value="'.$reward_level['reward_level_id'].'">'.
+                         $reward_level['description'].'</option>';
+                }
+            ?>' +
+            '</select>' + 
+            '</td>' + 
+            '<td><input type="text" name="detail" maxlength="255" /></td>' + 
+            '<td><input type="text" name="additional-score" /></td>' +
+            '</tr>'
+        );
+    }
 </script>
 
 <!-- JavaScript for New Rewards Model -->
@@ -150,26 +157,6 @@
     $('#new-record-trigger').click(function() {
         add_new_record();
     })
-</script>
-<script type="text/javascript">
-    function add_new_record() {
-        $('#new-rewards-table').append(
-            '<tr class="no-border">' + 
-            '<td>' + 
-            '<select name="level" style="width: 80px;">' + 
-            '<?php
-                foreach ( $reward_levels as $reward_level ) {
-                    echo '<option value="'.$reward_level['reward_level_id'].'">'.
-                         $reward_level['description'].'</option>';
-                }
-            ?>' +
-            '</select>' + 
-            '</td>' + 
-            '<td><input type="text" name="detail" maxlength="255" /></td>' + 
-            '<td><input type="text" name="additional-score" /></td>' +
-            '</tr>'
-        );
-    }
 </script>
 <script type="text/javascript">
     $('#new-rewards-table').delegate('input[name=additional-score]', 'change', function() {
@@ -233,4 +220,19 @@
             }
         });
     }
+</script>
+
+<!-- Document Ready Function -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        // loading reward records
+        var school_year = $('#available-years').val();
+        get_reward_records(school_year);
+
+        // add three new lines in new rewards model
+        var NUMBER_OF_LINES = 3;
+        for ( i = 0; i < NUMBER_OF_LINES; ++ i ) {
+            add_new_record();
+        }
+    });
 </script>
