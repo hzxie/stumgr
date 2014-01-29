@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/messenger-theme-future.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/home-page.css">
 	<!-- Java Script -->
-	<script src="<?php echo base_url(); ?>public/js/jquery-1.10.1.min.js"></script>
+	<script src="<?php echo base_url(); ?>public/js/jquery-1.11.0.min.js"></script>
 </head>
 
 <body>

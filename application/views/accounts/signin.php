@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap-responsive.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/signin-page.css">
 	<!-- Java Script -->
-	<script src="<?php echo base_url(); ?>public/js/jquery-1.10.1.min.js"></script>
+	<script src="<?php echo base_url(); ?>public/js/jquery-1.11.0.min.js"></script>
 </head>
 
 <body>
