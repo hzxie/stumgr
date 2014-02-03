@@ -94,10 +94,10 @@
                         );
                     }
                     set_visible('#page-error', false);
-                    set_visible('#reward-records', true);
+                    set_visible('#list', true);
                 } else {
                     set_visible('#page-error', true);
-                    set_visible('#reward-records', false);
+                    set_visible('#list', false);
                 }
             }
         });
