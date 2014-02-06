@@ -8,24 +8,24 @@
 	<!-- Page Icon -->
 	<link rel="shortcut icon" href="http://rjxy.hfut.edu.cn/cms/wp-content/uploads/system-reserved/favicon.png" />
 	<!-- CSS -->
-	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap-responsive.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/signin-page.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/signin-page.css">
 	<!-- Java Script -->
-	<script src="<?php echo base_url(); ?>public/js/jquery-1.11.0.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>
 </head>
 
 <body>
 	<div id="wrapper">
 		<div id="header">
-			<img id="logo" src="<?php echo base_url(); ?>public/img/product-logo.png" alt="软件学院学生管理系统" />
+			<img id="logo" src="<?php echo base_url(); ?>assets/img/product-logo.png" alt="软件学院学生管理系统" />
 			<span id="signup-button">
 				<button id="signup" class="btn btn-danger">创建新账户</button>
 			</span> <!-- /signup-button -->
 		</div> <!-- /header -->
 		<div id="content" class="row">
 			<div id="introduction" class="span6">
-				<img src="<?php echo base_url(); ?>public/img/bg.png" />
+				<img src="<?php echo base_url(); ?>assets/img/bg.png" />
 			</div>
 			<div id="signin-box" class="span3">
 				<h2>用户登录</h2>

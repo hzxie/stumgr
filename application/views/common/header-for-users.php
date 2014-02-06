@@ -8,12 +8,12 @@
 	</ul>
 </div> <!-- /nav-bar -->
 <div id="user-bar">
-	<img id="logo" src="<?php echo base_url(); ?>public/img/product-logo.png" alt="软件学院学生管理系统" />
+	<img id="logo" src="<?php echo base_url(); ?>assets/img/product-logo.png" alt="软件学院学生管理系统" />
 	<div id="user">
 		<a id="profile-trigger" href="javascript:void(0)"><ul class="inline">
 			<li><?php echo ( isset($profile) ? $profile['display_name'] : 'Unknown' ); ?></li>
 			<li>
-				<span id="gravatar-small"><img src="<?php echo base_url(); ?>public/img/gravatar.png" alt="gravatar" /></span>
+				<span id="gravatar-small"><img src="<?php echo base_url(); ?>assets/img/gravatar.png" alt="gravatar" /></span>
 				<span id="scroll-down-button"></span>
 			</li>
 		</ul></a>
@@ -23,7 +23,7 @@
 		<span id="arrow-shadow"></span>
 		<div id="brief-profile">
 			<div id="gravatar-large">
-				<img src="<?php echo base_url(); ?>public/img/gravatar.png" alt="gravatar" />
+				<img src="<?php echo base_url(); ?>assets/img/gravatar.png" alt="gravatar" />
 			</div> <!-- gravatar-large -->
 			<div id="profile-info">
 				<div id="user-info">

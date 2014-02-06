@@ -31,8 +31,8 @@
 </div> <!-- /list -->
 
 <!-- DateTime Packer -->
-<script type="text/javascript" src="<?php echo base_url(); ?>public/js/datetimepicker.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>public/js/datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/datetimepicker.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/datetimepicker.zh-CN.js"></script>
 <script type="text/javascript">
     function initialize_datetimepicker() {
     	$('.form_datetime').datetimepicker({

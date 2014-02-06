@@ -70,7 +70,7 @@
 <button id="submit" class="btn btn-primary" onclick="javascript:post_votes_request();" disabled="disabled">提交</button>
 <button class="btn btn-cancel" onclick="javascript:reset_options();">重置</button>
 
-<script src="<?php echo base_url(); ?>public/js/messenger.min.js"></script> 
+<script src="<?php echo base_url(); ?>assets/js/messenger.min.js"></script> 
 <script type="text/javascript">
     $._messengerDefaults = {
         extraClasses: 'messenger-fixed messenger-theme-future messenger-on-bottom messenger-on-right'

@@ -8,11 +8,11 @@
 	<!-- Page Icon -->
 	<link rel="shortcut icon" href="http://rjxy.hfut.edu.cn/cms/wp-content/uploads/system-reserved/favicon.png" />
 	<!-- CSS -->
-	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/bootstrap-responsive.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/support-page.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/support-page.css">
 	<!-- Java Script -->
-	<script src="<?php echo base_url(); ?>public/js/jquery-1.11.0.min.js"></script>	
+	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>	
 </head>
 <body>
 	<div id="wrapper">
@@ -51,7 +51,7 @@
 	</div> <!-- /container -->
 	<!-- JavaScript -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script type="text/javascript" src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>	
 	<script type="text/javascript">   
 		
 	</script>
