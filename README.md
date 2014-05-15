@@ -1,4 +1,4 @@
-[![Student Management System](http://rjxy.hfut.edu.cn/stumgr/public/img/product-logo.png)](http://rjxy.hfut.edu.cn/stumgr)
+[![Student Management System](http://rjxy.hfut.edu.cn/stumgr/assets/img/product-logo.png)](http://rjxy.hfut.edu.cn/stumgr)
 
 Version: 2.0.0 (Under Development)
 
