@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/messenger.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/messenger-theme-future.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/fineuploader.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/admin-page.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/admin.css">
 	<!-- Java Script -->
 	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>
 </head>

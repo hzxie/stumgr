@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/datetimepicker.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/messenger.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/messenger-theme-future.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/home-page.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/home.css">
 	<!-- Java Script -->
 	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>
 </head>

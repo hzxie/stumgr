@@ -1,14 +1,7 @@
 html,body {
-	position:absolute;
 	font-family: "Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Microsoft Yahei";
 	margin: 0 auto;
 	padding:0;
-	min-width: 100%;
-	height: 100%
-}
-
-#wrapper {
-	width: 100%;
 }
 
 #header {
@@ -31,22 +24,24 @@ html,body {
 #content {
 	margin:0 auto;
 	padding-top: 48px;
-	width: 100%;
-	max-width: 1000px;
-	min-width: 780px;
+	padding-bottom: 48px;
 }
 
-#content #introduction {
-	float: left;
+#content #introduction.span6 {
+	padding-left: 2%;
+	padding-right: 2%;
 }
 
-#content #signin-box {
+#content #signin-container.span6 {
+	padding-top: 2%;
+	padding-left: 8%;
+	padding-right: 8%;
+}
+
+#signin-container #signin-box {
 	background: #f1f1f1;
 	border: 1px solid #e5e5e5;
-	float: right;
-	margin: 16px 0;
 	padding: 24px;
-	width: 335px;
 }
 
 #content #signin-box label#remember {
@@ -77,12 +72,11 @@ html,body {
 #footer {
 	border-top: 1px solid #ebebeb;
 	font-size: 92%;
-	height: 36px;
+	height: 32px;
+	margin-top: 48px;
 	overflow: hidden;
 	padding-top: 8px;
 	width: 100%;
-	position:absolute;
-	bottom:0;
 }
 
 #footer #copyright {
