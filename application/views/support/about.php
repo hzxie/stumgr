@@ -10,7 +10,7 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/support-page.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/support.css">
 	<!-- Java Script -->
 	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>	
 </head>
