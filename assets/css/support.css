@@ -1,240 +1,348 @@
 html, body {
-	position:absolute;
-	font-family: "Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Microsoft Yahei";
-	margin: 0 auto;
-	padding:0px;
-	width: 100%;
-	min-height:100%;
-	overflow: auto;
+    font-family: "Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Microsoft Yahei";
+    margin: 0;
+    padding: 0;
 }
 
+/* Sections */
+/* padding for in-page bookmarks */
+section {
+    padding-top: 30px;
+}
+
+section > .page-header,
+section > .lead {
+    color: #5a5a5a;
+}
+
+section > ul li {
+    margin-bottom: 5px;
+}
+
+/* Header */
 #header {
-	background: #f1f1f1;
-	overflow: hidden;
-	min-width: 768px;
+    background: #f1f1f1;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-#header #nav-bar {
-	background-color: #2d2d2d;
-	border-bottom: 1px solid #666;
-	border-color: #e5e5e5;
-	color: #bbb;
-	font-size: 14px;
-	font-weight: bold;
-	height: 32px;
-	padding-left: 32px;
+#header #logo {
+    padding: 10px;
 }
 
-#header #nav-bar ul {
-	padding-top: 4px;
+#header #quick-login {
+    padding-top: 30px;
 }
 
-#header #nav-bar a {
-	color: #bbb;
-	padding-right: 16px;
-	text-decoration: none;
+#header #quick-login label#remember {
+    font-size: 12px;
 }
 
-#header #user-bar {
-	background-color: #f5f5f5;
-	border-bottom: 1px solid #e5e5e5;
-	padding: 8px 32px 8px 32px;
+#header #quick-login input#persistent-cookie {
+    margin-top: 4px;
 }
 
-#header #user {
-	float: right;
-	margin-top: 12px;
-}
-
-#user a {
-	color: #666;
-	text-decoration: none;
-}
-
-#header #gravatar-small {
-	background-color: #f8f8f8;
-	background-image: -webkit-linear-gradient(top,#f8f8f8,#ececec);
-	border: 1px solid #c6c6c6;
-	display: block;
-	margin-top: -8px;
-	height: 32px;
-	width: 32px;
-}
-
-#gravatar-small img {
-	height: 32px;
-	width: 32px;
-}
-
-#profile {
-	background-color: #f5f5f5;
-	box-shadow: 0 2px 4px rgba(0,0,0,.2);
-	border: 1px solid #bebebe;
-	display: none;
-	position: absolute;
-	right: 32px;
-	top: 96px;
-	text-align: left;
-	z-index: 16384;
-}
-
-#profile span#arrow {
-	display: inline-block;
-	border-bottom:solid 12px #fff;
-    border-left: solid 8px transparent;
-    border-right: solid 8px transparent;
-	position: absolute;
-	top: -10px;
-	right: 16px;
-	z-index: 16384;
-}
-
-#profile span#arrow-shadow {
-	display: inline-block;
-	border-bottom:solid 12px #bebebe;
-    border-left: solid 8px transparent;
-    border-right: solid 8px transparent;
-	position: absolute;
-	top: -12px;
-	right: 16px;
-	z-index: 16383;
-}
-
-#profile #brief-profile {
-	background: #fff;
-	border-bottom: 1px solid #bebebe;
-	box-shadow: 0 2px 4px rgba(0,0,0,.12);
-	padding: 16px;
-}
-
-#brief-profile #gravatar-large {
-	display: inline-block;
-}
-
-#brief-profile #profile-info {
-	display: inline-block;
-	padding-left: 16px;
-	padding-right: 48px;
-	vertical-align: top;
-}
-
-#profile-info #user-info {
-	padding-bottom: 24px;
-}
-
-#profile-info #user-info span {
-	display: block;
-}
-
-#profile-info #user-info #username {
-	color: #666;
-	font-size: 13px;
-}
-
-#profile #sign-out {
-	padding: 8px 16px 8px 16px;
-	text-align: right;
-}
-
-#scroll-down-button {
-	background-image: url('../img/arrow_down.png');
-	background-size: 7px 4px;
-	opacity: .8;
-	position: absolute;
-	top: 64px;
-	right:	24px;
-	height: 4px;
-	width: 7px;
-}
-
-#header #visitor-bar {
-	padding: 12px 48px 12px 48px;
-	border-bottom: 1px solid #e5e5e5;
-}
-
-#header #signin-button {
-	float: right;
-	margin-top: 12px;
-}
-
-#signin-button #remember {
-	font-size: 12px;
-	padding-top: 3 px;
-	padding-right: 4px;
-}
-
-#signin-button #persistent-cookie {
-	margin-top: 2px;
-}
-
-#content {
-	margin:0 auto;
-	padding-top: 24px;
-	padding-bottom: 108px;
-	width: auto;
-	max-width: 1024px;
-	min-width: 800px;
-	height:70%;
-}
-
-#content #maia-breadcrumb {
-	padding: 8px 4px;
-}
-
-#content #navigator {
-	float: left;
-	position: relative;
-	margin-left: 20px;
-	margin-right: 32px;
-	width: 256px;
-}
-
-#supporter {
-	list-style: none;
-	text-indent: -1em;
-}
-
-.sidenav .icon-chevron-right {
-	float: right;
-	margin-top: 12px;
-	margin-right: 8px;
-	opacity: .25;
-}
-
-.section-content {
-	padding-bottom: 32px;
-}
-
-h3.version-header {
-	background: #f1f1f1;
-	border-top: 2px solid #e5e5e5;
-	padding: 10px 50px 10px 0;
-}
-
+/* Footer */
 #footer {
-	background-color: #FFF;
-	border-top: 1px solid #ebebeb;
-	font-size: 92%;
-	height: 36px;
-	overflow: hidden;
-	padding-top: 8px;
-	width: 100%;
-	position:absolute;
-	bottom:0;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 70px;
+    border-top: 1px solid #e5e5e5;
+    background-color: #f5f5f5;
 }
 
-#footer #copyright {
-	color: #666;
-	float: left;
-	margin-left: 48px;
+
+/* Sidenav  */
+#sidenav {
+    width: 228px;
+    margin: 30px 0 0;
+    padding: 0;
+    background-color: #fff;
+    -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+            border-radius: 6px;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+       -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+            box-shadow: 0 1px 4px rgba(0,0,0,.065);
 }
 
-#footer #help-and-support {
-	float: right;
-	margin-right: 48px;
+#sidenav > li > a {
+    display: block;
+    width: 190px \9;
+    margin: 0 0 -1px;
+    padding: 8px 14px;
+    border: 1px solid #e5e5e5;
 }
 
-#footer #help-and-support a {
-	color: #333;
-	text-decoration: none;
+#sidenav > li:first-child > a {
+    -webkit-border-radius: 6px 6px 0 0;
+         -moz-border-radius: 6px 6px 0 0;
+                    border-radius: 6px 6px 0 0;
+}
+
+#sidenav > li:last-child > a {
+    -webkit-border-radius: 0 0 6px 6px;
+         -moz-border-radius: 0 0 6px 6px;
+                    border-radius: 0 0 6px 6px;
+}
+
+#sidenav > .active > a {
+    position: relative;
+    z-index: 2;
+    padding: 9px 15px;
+    border: 0;
+    text-shadow: 0 1px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+         -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+                    box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
+
+/* Chevrons */
+#sidenav .icon-chevron-right {
+    float: right;
+    margin-top: 10px;
+    margin-right: -6px;
+    opacity: .25;
+}
+
+#sidenav > li > a:hover {
+    background-color: #f5f5f5;
+}
+
+#sidenav a:hover .icon-chevron-right {
+    opacity: .5;
+}
+
+#sidenav .active .icon-chevron-right,
+#sidenav .active a:hover .icon-chevron-right {
+    background-image: url(../img/glyphicons-halflings.png);
+    opacity: .25;
+}
+
+#sidenav.affix {
+    top: 40px;
+}
+
+#sidenav.affix-bottom {
+    position: absolute;
+    top: auto;
+    bottom: 270px;
+}
+
+
+/* Responsive
+-------------------------------------------------- */
+
+/* Desktop large
+------------------------- */
+@media (min-width: 1200px) {
+    .bs-docs-container {
+        max-width: 970px;
+    }
+    #sidenav {
+        width: 258px;
+    }
+    #sidenav > li > a {
+        width: 230px \9; /* Override the previous IE8-9 hack */
+    }
+}
+
+/* Desktop
+------------------------- */
+@media (max-width: 980px) {
+    /* Unfloat brand */
+    body > .navbar-fixed-top .brand {
+        float: left;
+        margin-left: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    /* Inline-block quick links for more spacing */
+    .quick-links li {
+        display: inline-block;
+        margin: 5px;
+    }
+
+    /* When affixed, space properly */
+    #sidenav {
+        top: 0;
+        width: 218px;
+        margin-top: 30px;
+        margin-right: 0;
+    }
+}
+
+/* Tablet to desktop
+------------------------- */
+@media (min-width: 768px) and (max-width: 979px) {
+    /* Remove any padding from the body */
+    body {
+        padding-top: 0;
+    }
+    /* Widen masthead and social buttons to fill body padding */
+    .jumbotron {
+        margin-top: -20px; /* Offset bottom margin on .navbar */
+    }
+    /* Adjust sidenav width */
+    #sidenav {
+        width: 166px;
+        margin-top: 20px;
+    }
+    #sidenav.affix {
+        top: 0;
+    }
+}
+
+/* Tablet
+------------------------- */
+@media (max-width: 767px) {
+    /* Remove any padding from the body */
+    body {
+        padding-top: 0;
+    }
+
+    /* Widen masthead and social buttons to fill body padding */
+    .jumbotron {
+        padding: 40px 20px;
+        margin-top:   -20px; /* Offset bottom margin on .navbar */
+        margin-right: -20px;
+        margin-left:  -20px;
+    }
+    .masthead h1 {
+        font-size: 90px;
+    }
+    .masthead p,
+    .masthead .btn {
+        font-size: 24px;
+    }
+    .marketing .span4 {
+        margin-bottom: 40px;
+    }
+    .bs-docs-social {
+        margin: 0 -20px;
+    }
+
+    /* Space out the show-grid examples */
+    .show-grid [class*="span"] {
+        margin-bottom: 5px;
+    }
+
+    /* Sidenav */
+    #sidenav {
+        width: auto;
+        margin-bottom: 20px;
+    }
+    #sidenav.affix {
+        position: static;
+        width: auto;
+        top: 0;
+    }
+
+    /* Unfloat the back to top link in footer */
+    .footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .footer p {
+        margin-bottom: 9px;
+    }
+}
+
+/* Landscape phones
+------------------------- */
+@media (max-width: 480px) {
+    /* Remove padding above jumbotron */
+    body {
+        padding-top: 0;
+    }
+
+    /* Change up some type stuff */
+    h2 small {
+        display: block;
+    }
+
+    /* Downsize the jumbotrons */
+    .jumbotron h1 {
+        font-size: 45px;
+    }
+    .jumbotron p,
+    .jumbotron .btn {
+        font-size: 18px;
+    }
+    .jumbotron .btn {
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* center align subhead text like the masthead */
+    .subhead h1,
+    .subhead p {
+        text-align: center;
+    }
+
+    /* Marketing on home */
+    .marketing h1 {
+        font-size: 30px;
+    }
+    .marketing-byline {
+        font-size: 18px;
+    }
+
+    /* center example sites */
+    .example-sites {
+        margin-left: 0;
+    }
+    .example-sites > li {
+        float: none;
+        display: block;
+        max-width: 280px;
+        margin: 0 auto 18px;
+        text-align: center;
+    }
+    .example-sites .thumbnail > img {
+        max-width: 270px;
+    }
+
+    /* Do our best to make tables work in narrow viewports */
+    table code {
+        white-space: normal;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+
+    /* Examples: dropdowns */
+    .bs-docs-example-submenus > .pull-left {
+        float: none;
+        clear: both;
+    }
+    .bs-docs-example-submenus > .pull-left,
+    .bs-docs-example-submenus > .pull-left + .pull-left {
+        margin-left: 0;
+    }
+    .bs-docs-example-submenus p {
+        margin-bottom: 0;
+    }
+    .bs-docs-example-submenus .dropup > .dropdown-menu,
+    .bs-docs-example-submenus .dropdown > .dropdown-menu {
+        margin-bottom: 10px;
+        float: none;
+        max-width: 180px;
+    }
+
+    /* Examples: modal */
+    .modal-example .modal {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+    }
+
+    /* Tighten up footer */
+    .footer {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 }

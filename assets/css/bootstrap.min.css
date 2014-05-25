@@ -4298,10 +4298,8 @@ input[type="submit"].btn.btn-mini {
 }
 
 .nav-list > li  {
-	border: 1px solid #CCC;
 	line-height: 36px;
 	list-style: none;
-	margin: -1px;
 }
 
 .nav-list > li > a {
