@@ -21,6 +21,66 @@ class Lib_evaluation {
     }
 
     /**
+     * Get the current school year in school.
+     * @return the current school year in school
+     */
+    public function get_current_school_year()
+    {
+        $current_month = date('n');
+
+        if ( $current_month >= 8 ) {
+            return date('Y');
+        } else {
+            return (date('Y') - 1);
+        }
+    }
+
+    /**
+     * Get the current semester in school.
+     * @return the current semester in school
+     */
+    public function get_current_semester()
+    {
+        $current_month = date('n');
+
+        if ( $current_month >= 8 || $current_month <= 1 ) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    /**
+     * Get available years to select from existing data.
+     * 
+     * The function is mainly used for students to query their attendance
+     * records from the database. So the available years should not earlier
+     * than when they attend university.
+     *
+     * @param String  student_id - the student id of the student
+     * @return an array contains all available years
+     */
+    public function get_available_years_for_assessment()
+    {
+        return array_reverse( $this->__CI->Assessment_model->get_available_years() );
+    }
+
+    /**
+     * Get available grades to select from existing data.
+     * @return an array contains all available grades
+     */
+    public function get_available_grades()
+    {
+        $available_grades = $this->__CI->Students_model->get_available_grades();
+        return array_reverse($available_grades);
+    }
+
+    public function get_assessment_records($year, $grade)
+    {
+        return $this->__CI->Assessment_model->get_assessment_records($year, $grade);
+    }
+
+    /**
      * [is_participated description]
      * @param  int     $year - the year when the peer assessment carried on
      * @param  String  $student_id - the student id of the student
@@ -118,10 +178,10 @@ class Lib_evaluation {
     private function get_votes_statistics(&$posted_votes, &$students, $voter_student_id)
     {
         $votes = array(
-                'moral_excellent'       => 0, 'moral_good'      => 0, 'moral_medium'    => 0, 'moral_poor'      => 0,
-                'strength_excellent'    => 0, 'strength_good'   => 0, 'strength_medium' => 0, 'strength_poor'   => 0,
-                'ability_excellent'     => 0, 'ability_good'    => 0, 'ability_medium'  => 0, 'ability_poor'    => 0
-            );
+            'moral_excellent'       => 0, 'moral_good'      => 0, 'moral_medium'    => 0, 'moral_poor'      => 0,
+            'strength_excellent'    => 0, 'strength_good'   => 0, 'strength_medium' => 0, 'strength_poor'   => 0,
+            'ability_excellent'     => 0, 'ability_good'    => 0, 'ability_medium'  => 0, 'ability_poor'    => 0
+        );
         foreach ( $students as $student ) {
             $student_id = $student['student_id'];
             if ( $student_id == $voter_student_id ) {

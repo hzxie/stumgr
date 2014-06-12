@@ -49,7 +49,7 @@ class Admin extends CI_Controller {
                 'username'          => $username,
                 'display_name'      => $username,
                 'is_administrator'  => true
-            );
+        );
     }
 
     /**
@@ -121,11 +121,11 @@ class Admin extends CI_Controller {
     {
         $session = $this->session->all_userdata();
         $welcome = array(
-                'display_name'          => $this->profile['display_name'],
-                'ip_address'            => $session['ip_address'],
-                'last_time_signin'      => $session['last_time_signin'],
-                'allow_auto_sign_in'    => $session['allow_auto_sign_in']
-            );
+            'display_name'          => $this->profile['display_name'],
+            'ip_address'            => $session['ip_address'],
+            'last_time_signin'      => $session['last_time_signin'],
+            'allow_auto_sign_in'    => $session['allow_auto_sign_in']
+        );
         $data = array( 'welcome' => $welcome, 'profile' => $this->profile );
         return $data;
     }
@@ -172,13 +172,13 @@ class Admin extends CI_Controller {
     public function add_user() 
     {
         $user_information = array(
-                'student_id'    => $this->input->post('student_id'),
-                'student_name'  => $this->input->post('student_name'),
-                'grade'         => $this->input->post('grade'),
-                'class'         => $this->input->post('class'),
-                'room'          => $this->input->post('room'),
-                'password'      => $this->input->post('password')
-            );
+            'student_id'    => $this->input->post('student_id'),
+            'student_name'  => $this->input->post('student_name'),
+            'grade'         => $this->input->post('grade'),
+            'class'         => $this->input->post('class'),
+            'room'          => $this->input->post('room'),
+            'password'      => $this->input->post('password')
+        );
 
         $result = $this->lib_accounts->add_user($user_information);
         echo json_encode($result);
@@ -220,7 +220,7 @@ class Admin extends CI_Controller {
                 'is_successful'         => false,
                 'is_upload_successful'  => false,   'is_query_successful'   => false,
                 'success_message'       => '',      'error_message'         => ''
-            );
+        );
 
         $upload_result = $this->upload_files();
         $result['is_upload_successful']     = $upload_result['is_successful'];
@@ -292,7 +292,7 @@ class Admin extends CI_Controller {
         $result = array(
                 'is_successful' => ( count($students) != 0 ),
                 'students'      => $students
-            );
+        );
         echo json_encode($result);
     }
 
@@ -315,15 +315,15 @@ class Admin extends CI_Controller {
     public function edit_user_profile($student_id)
     {
         $profile = array(
-                'student_name'          => $this->input->post('student_name'),
-                'grade'                 => $this->input->post('grade'),
-                'class'                 => $this->input->post('class'),
-                'user_group_name'       => $this->input->post('user_group_name'),
-                'room'                  => $this->input->post('room'),
-                'mobile'                => $this->input->post('mobile'),
-                'email'                 => $this->input->post('email'),
-                'password'              => $this->input->post('password')
-            );
+            'student_name'          => $this->input->post('student_name'),
+            'grade'                 => $this->input->post('grade'),
+            'class'                 => $this->input->post('class'),
+            'user_group_name'       => $this->input->post('user_group_name'),
+            'room'                  => $this->input->post('room'),
+            'mobile'                => $this->input->post('mobile'),
+            'email'                 => $this->input->post('email'),
+            'password'              => $this->input->post('password')
+        );
         $result = $this->lib_accounts->edit_user_profile($student_id, $profile, $result);
 
         echo json_encode($result);
@@ -371,15 +371,15 @@ class Admin extends CI_Controller {
     public function get_data_for_attendance()
     {
         $extra = array(
-                'current_school_year'   => $this->lib_routine->get_current_school_year(),
-                'current_semester'      => $this->lib_routine->get_current_semester(),
-            );
+            'current_school_year'   => $this->lib_routine->get_current_school_year(),
+            'current_semester'      => $this->lib_routine->get_current_semester(),
+        );
         $data = array( 
-                'available_years'   => $this->lib_routine->get_all_available_years_for_attendance(),
-                'available_grades'  => $this->lib_routine->get_available_grades(),
-                'rules'             => $this->lib_routine->get_rules_list('Administrators'),
-                'extra'             => $extra
-            );
+            'available_years'   => $this->lib_routine->get_all_available_years_for_attendance(),
+            'available_grades'  => $this->lib_routine->get_available_grades(),
+            'rules'             => $this->lib_routine->get_rules_list('Administrators'),
+            'extra'             => $extra
+        );
         return $data;
     }
 
@@ -395,9 +395,9 @@ class Admin extends CI_Controller {
     {
         $attendance_records = $this->lib_routine->get_attendance_records_by_grade($school_year, $grade, $time);
         $result = array(
-                'is_successful' => ($attendance_records != false),
-                'records'       => $attendance_records
-            );
+            'is_successful' => ($attendance_records != false),
+            'records'       => $attendance_records
+        );
         echo json_encode($result);
     }
 
@@ -408,14 +408,14 @@ class Admin extends CI_Controller {
     public function edit_attendance_records()
     {
         $attendance_data = array(
-                'student_id'    => $this->input->post('student_id'),
-                'old_time'      => $this->input->post('old_time'),
-                'new_time'      => $this->input->post('new_time'),
-                'reason'        => $this->input->post('reason')
-            );
+            'student_id'    => $this->input->post('student_id'),
+            'old_time'      => $this->input->post('old_time'),
+            'new_time'      => $this->input->post('new_time'),
+            'reason'        => $this->input->post('reason')
+        );
         $result = array(
-                'is_successful' => $this->lib_routine->edit_attendance_record($attendance_data)
-            );
+            'is_successful' => $this->lib_routine->edit_attendance_record($attendance_data)
+        );
         echo json_encode($result);
     }
 
@@ -428,8 +428,8 @@ class Admin extends CI_Controller {
         $student_id = $this->input->post('student_id');
         $time       = $this->input->post('time');
         $result = array(
-                'is_successful' => $this->lib_routine->delete_attendance_record($student_id, $time)
-            );
+            'is_successful' => $this->lib_routine->delete_attendance_record($student_id, $time)
+        );
         echo json_encode($result);
     }
 
@@ -461,7 +461,7 @@ class Admin extends CI_Controller {
                 'is_successful'         => false,
                 'is_upload_successful'  => false,   'is_query_successful'   => false,
                 'success_message'       => '',      'error_message'         => ''
-            );
+        );
 
         $upload_result = $this->upload_files();
         $result['is_upload_successful']     = $upload_result['is_successful'];
@@ -509,7 +509,27 @@ class Admin extends CI_Controller {
      */
     public function get_data_for_assessment()
     {
-        
+        $extra = array(
+            'current_school_year'   => $this->lib_evaluation->get_current_school_year(),
+            'current_semester'      => $this->lib_evaluation->get_current_semester(),
+        );
+        $data = array( 
+            'available_years'   => $this->lib_evaluation->get_available_years_for_assessment(),
+            'available_grades'  => $this->lib_evaluation->get_available_grades(),
+            'options'           => $this->options,
+            'extra'             => $extra
+        );
+        return $data;
+    }
+
+    public function get_assessment_records($year, $grade)
+    {
+        $assessment_records = $this->lib_evaluation->get_assessment_records($year, $grade);
+        $result = array(
+            'is_successful' => ($assessment_records != false),
+            'records'       => $assessment_records
+        );
+        echo json_encode($result);
     }
 
     /**

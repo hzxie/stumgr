@@ -367,8 +367,11 @@ class Home extends CI_Controller {
                 'grade'             =>  $this->profile['grade'],
                 'class'             =>  $this->profile['class']
             );
-        $data = array( 'options'    => $this->options, 'students' => $students,
-                       'extra'      => $extra );
+        $data = array( 
+                    'options'       => $this->options, 
+                    'students'      => $students,
+                    'extra'         => $extra 
+                );
         return $data;
     }
 
