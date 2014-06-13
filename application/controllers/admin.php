@@ -1,25 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * It is the CORE class of the system. It provides services
- * for administrators.
+ * 系统的核心业务类. 管理员用户的Controller.
  * 
  * @author Xie Haozhe <zjhzxhz@gmail.com>
  */
 class Admin extends CI_Controller {
     /**
-     * @var an array contains the student's information
+     * @var 一个包含登录用户信息的数组.
      */
     private $profile;
+
     /**
-     * @var an array contains all options.
+     * @var 一个包含系统参数的数组.
      */
     private $options;
+
     /**
-     * The contructor of the class.
-     *
-     * If the user hasn't logged in, it will redirect to
-     * the Accounts controller.
+     * 构造函数. 加载Business层的Library.
      */
     public function __construct()
     {
@@ -40,20 +38,20 @@ class Admin extends CI_Controller {
     }
 
     /**
-     * Get the profile of the student.
-     * @param  String  $username - the username of the user
+     * 获取用户的用户信息.
+     * @param  String  $username - 用户名
      */
     private function get_profile($username)
     {
         $this->profile = array(
-                'username'          => $username,
-                'display_name'      => $username,
-                'is_administrator'  => true
+            'username'          => $username,
+            'display_name'      => $username,
+            'is_administrator'  => true
         );
     }
 
     /**
-     * Get the options of the system.
+     * 获取系统参数.
      */
     private function get_options()
     {
@@ -65,9 +63,9 @@ class Admin extends CI_Controller {
     }
 
     /**
-     * Get the value of a certain option.
-     * @param  String $option_name - the name of the option
-     * @return the value of the option
+     * 获取某一个系统参数的值.
+     * @param  String $option_name - 系统参数的名称
+     * @return 系统参数的值
      */
     private function get_option($option_name)
     {
@@ -459,8 +457,10 @@ class Admin extends CI_Controller {
     {
         $result = array(
                 'is_successful'         => false,
-                'is_upload_successful'  => false,   'is_query_successful'   => false,
-                'success_message'       => '',      'error_message'         => ''
+                'is_upload_successful'  => false,   
+                'is_query_successful'   => false,
+                'success_message'       => '',      
+                'error_message'         => '',
         );
 
         $upload_result = $this->upload_files();
@@ -500,7 +500,10 @@ class Admin extends CI_Controller {
      */
     public function get_data_for_evaluationsettings()
     {
-        
+        $data = array(
+            'options'   => $this->options
+        );
+        return $data;
     }
 
     /**
@@ -517,7 +520,7 @@ class Admin extends CI_Controller {
             'available_years'   => $this->lib_evaluation->get_available_years_for_assessment(),
             'available_grades'  => $this->lib_evaluation->get_available_grades(),
             'options'           => $this->options,
-            'extra'             => $extra
+            'extra'             => $extra,
         );
         return $data;
     }

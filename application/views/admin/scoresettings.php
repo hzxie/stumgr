@@ -1,3 +1,5 @@
+<link href="<?php echo base_url(); ?>assets/css/fineuploader.min.css" media="screen" rel="stylesheet" type="text/css" />
+
 <div id="score-settings-header" class="page-header">
     <h1>参数设置</h1>
 </div> <!-- /score-settings-header -->

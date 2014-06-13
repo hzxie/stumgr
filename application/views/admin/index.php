@@ -3,18 +3,14 @@
 <head>
 	<title>软件学院学生管理系统</title>
 	<meta charset='utf-8' />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Page Icon -->
 	<link rel="shortcut icon" href="http://rjxy.hfut.edu.cn/cms/wp-content/uploads/system-reserved/favicon.png" />
 	<!-- CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/datetimepicker.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/messenger.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/messenger-theme-future.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/fineuploader.min.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/admin.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/admin/style.css">
 	<!-- Java Script -->
 	<script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>
 </head>

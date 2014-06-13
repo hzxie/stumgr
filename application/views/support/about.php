@@ -11,7 +11,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/support.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/support/style.css">
     <!-- Java Script -->
     <script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script> 
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script> 

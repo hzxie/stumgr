@@ -1,3 +1,5 @@
+<link href="<?php echo base_url(); ?>assets/css/datetimepicker.css" media="screen" rel="stylesheet" type="text/css" />
+
 <div id="attendance-header" class="page-header">
 	<h1>考勤情况</h1>
 </div> <!-- /attendance-header -->

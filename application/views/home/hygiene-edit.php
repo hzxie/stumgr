@@ -1,3 +1,5 @@
+<link href="<?php echo base_url(); ?>assets/css/datetimepicker.css" media="screen" rel="stylesheet" type="text/css" />
+
 <div id="selector">
 	<select id="available-years" class="span2" disabled="disabled">
 		<?php

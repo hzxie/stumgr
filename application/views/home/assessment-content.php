@@ -1,3 +1,6 @@
+<link rel="stylesheet" media="screen" href="<?php echo base_url(); ?>assets/css/messenger.css">
+<link rel="stylesheet" media="screen" href="<?php echo base_url(); ?>assets/css/messenger-theme-future.css">
+
 <div class="alert alert-info">
     <?php
         $number_of_students = count($students);

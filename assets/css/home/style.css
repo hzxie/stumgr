@@ -1,0 +1,338 @@
+html, body {
+    position:absolute;
+    font-family: "Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Microsoft Yahei";
+    margin: 0 auto;
+    padding:0px;
+    width: 100%;
+    min-height:100%;
+    overflow: hidden;
+}
+
+h1.redtext {
+    color: #dd4b39;
+    padding-bottom: 32px;
+}
+
+table.no-border,
+tr.no-border,
+td.no-border {
+    border: none;
+}
+
+td.left-border {
+    border-left: 1px solid #ddd;
+}
+
+td.text-center {
+    text-align: center;
+}
+
+td.text-bold {
+    font-weight: bold;
+    padding-bottom: 24px;
+}
+
+td.text-normal {
+    padding-bottom: 16px;
+}
+
+td.right-border {
+    border-right: 1px solid #ddd;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+#container {
+    min-width: 996px;
+}
+
+#header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    min-width: 768px;
+    z-index: 32768;
+}
+
+#header #nav-bar {
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #666;
+    border-color: #e5e5e5;
+    color: #bbb;
+    font-size: 14px;
+    font-weight: bold;
+    height: 32px;
+    padding-left: 32px;
+}
+
+#header #nav-bar ul {
+    padding-top: 4px;
+}
+
+#header #nav-bar a {
+    color: #bbb;
+    padding-right: 16px;
+    text-decoration: none;
+}
+
+#header #user-bar {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 8px 32px 8px 32px;
+}
+
+#header #user {
+    float: right;
+    margin-top: 12px;
+}
+
+#user a {
+    color: #666;
+    text-decoration: none;
+}
+
+#header #gravatar-small {
+    background-color: #f8f8f8;
+    background-image: -webkit-linear-gradient(top,#f8f8f8,#ececec);
+    border: 1px solid #c6c6c6;
+    display: block;
+    margin-top: -8px;
+    height: 32px;
+    width: 32px;
+}
+
+#gravatar-small img {
+    height: 32px;
+    width: 32px;
+}
+
+#profile {
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    border: 1px solid #bebebe;
+    display: none;
+    position: fixed;
+    right: 32px;
+    top: 96px;
+    text-align: left;
+    z-index: 16384;
+}
+
+#profile span#arrow {
+    display: inline-block;
+    border-bottom:solid 12px #fff;
+    border-left: solid 8px transparent;
+    border-right: solid 8px transparent;
+    position: fixed;
+    top: 86px;
+    right: 48px;
+    z-index: 16384;
+}
+
+#profile span#arrow-shadow {
+    display: inline-block;
+    border-bottom:solid 12px #bebebe;
+    border-left: solid 8px transparent;
+    border-right: solid 8px transparent;
+    position: fixed;
+    top: 84px;
+    right: 48px;
+    z-index: 16383;
+}
+
+#profile #brief-profile {
+    background: #fff;
+    border-bottom: 1px solid #bebebe;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12);
+    padding: 16px;
+}
+
+#brief-profile #gravatar-large {
+    display: inline-block;
+}
+
+#brief-profile #profile-info {
+    display: inline-block;
+    padding-left: 16px;
+    padding-right: 48px;
+    vertical-align: top;
+}
+
+#profile-info #user-info {
+    padding-bottom: 24px;
+}
+
+#profile-info #user-info span {
+    display: block;
+}
+
+#profile-info #user-info #username {
+    color: #666;
+    font-size: 13px;
+}
+
+#profile #sign-out {
+    padding: 8px 16px 8px 16px;
+    text-align: right;
+}
+
+#scroll-down-button {
+    background-image: url('../../img/arrow_down.png');
+    background-size: 7px 4px;
+    opacity: .8;
+    position: absolute;
+    top: 64px;
+    right:    24px;
+    height: 4px;
+    width: 7px;
+}
+
+#content {
+    min-width: 996px;
+    min-height: 100%;
+}
+
+#content #sidebar {
+    padding-top: 24px;
+    position: fixed;
+    top: 108px;
+    height: 100%;
+    width: 216px;
+    z-index: 32767;
+}
+
+#sidebar a {
+    color: #333;
+    text-decoration: none;
+}
+
+#sidebar .sidebar-primary-nav {
+    color: #333;
+    padding: 8px 16px 8px 48px;
+}
+
+#sidebar .sidebar-primary-nav:hover {
+    background-color: #eee;
+}
+
+#sidebar .sidebar-secondary-nav {
+    color: #333;
+    display: none;
+    padding: 8px 16px 8px 64px;
+}
+
+#sidebar .sidebar-secondary-nav:hover {
+    background-color: #eee;
+}
+
+#sidebar .active {
+    border-left: 4px solid #dd4b39;
+    color:#dd4b39;
+    font-weight:bold;
+}
+
+#content #loading {
+    display: none;
+    font-size: 12px;
+    padding: 4px;
+    position: fixed;
+    margin:auto;
+    left: 0; right: 0; top: 84px;
+    text-align: center;
+    z-index: 32768;
+}
+
+.loading {
+    background-color: #f9edbe;
+    border: 1px #f0c36d solid;
+    color: #333;
+    width: 72px;
+}
+
+#loading.error {
+    background-color: #db4439;
+    color: white;
+    width: 108px;
+}
+
+#loading.error a {
+    color: white;
+    text-decoration: underline;
+}
+
+#content #shadow {
+    background-color: transparent;
+    background-image: -webkit-linear-gradient(top,rgba(0,0,0,0.2),transparent);
+    background-image: linear-gradient(top,rgba(0,0,0,0.2),transparent);
+    opacity: 0;
+    position: fixed;
+    top: 96px;
+    left: 216px;
+    right: 16px;
+    display: block;
+    height: 8px;
+    -webkit-mask-box-image: -webkit-linear-gradient(left,transparent 0%,rgba(0,0,0,.8) 50%,transparent 100%);
+    z-index: 65536;
+}
+
+#content #main-container {
+    overflow:auto;
+    padding-top: 32px;
+    position: absolute;
+    top: 96px; right: 0px; bottom: 0px; left: 240px;
+}
+
+#main-container #main-content {
+    min-width: 768px;
+    max-width: 62%;
+    padding-bottom: 32px;
+}
+
+#main-content .page-header .title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 4px 16px 16px 0px;
+}
+
+#main-content .section {
+    padding-right: 32px;
+    margin-bottom: 48px;
+}
+
+#main-content .dialog {
+    position: fixed;
+    top: 25%;
+}
+
+#footer {
+    border-top: 1px solid #ebebeb;
+    font-size: 92%;
+    height: 36px;
+    overflow: hidden;
+    padding-top: 8px;
+    min-width: 100%;
+    bottom:0;
+}
+
+#footer #copyright {
+    color: #666;
+    float: left;
+    margin-left: 48px;
+}
+
+#footer #help-and-support {
+    float: right;
+    margin-right: 48px;
+}
+
+#footer #help-and-support a {
+    color: #333;
+    text-decoration: none;
+}

@@ -1,3 +1,5 @@
+<link href="<?php echo base_url(); ?>assets/css/fineuploader.min.css" media="screen" rel="stylesheet" type="text/css" />
+
 <div id="add-users-header" class="page-header">
     <h1>添加用户</h1>
 </div> <!-- /add-users-header -->
