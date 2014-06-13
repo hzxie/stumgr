@@ -4,7 +4,7 @@
  * The model is for the stumgr_assessment table in the database.
  *
  * The structure of stumgr_assessment:
- *     year                 -- INT(4)       -- NOT NULL --  [PRIMARY]
+ *     school_year          -- INT(4)       -- NOT NULL --  [PRIMARY]
  *     student_id           -- VARCHAR(10)  -- NOT NULL --  [PRIMARY]
  *     is_participated      -- BOOLEAN      -- NOT NULL
  *     moral_excellent      -- INT(4)       -- NOT NULL
@@ -37,14 +37,14 @@ class Assessment_model extends CI_Model {
      * This function is mainly used for students to query their own scores
      * of peer assessment.
      * 
-     * @param  int $year - the year when the peer assessment carried on
+     * @param  int $school_year - the year when the peer assessment carried on
      * @param  String $student_id - the student id of the student
      * @return a record if the query is successful, or return false if 
      *         the query is failed
      */
-    public function select($year, $student_id)
+    public function select($school_year, $student_id)
     {
-        $this->db->where('year', $year);
+        $this->db->where('school_year', $school_year);
         $this->db->where('student_id', $student_id);
         $query = $this->db->get( $this->db->dbprefix('assessment') );
         if ( $query->num_rows() > 0 ) {
@@ -61,8 +61,8 @@ class Assessment_model extends CI_Model {
     public function get_available_years()
     {
         $this->db->distinct();
-        $this->db->select('year');
-        $this->db->order_by('year', 'asc');
+        $this->db->select('school_year');
+        $this->db->order_by('school_year', 'asc');
         $query = $this->db->get($this->db->dbprefix('assessment'));
         if ( $query->num_rows() > 0 ) {
             return $query->result_array();
@@ -71,7 +71,7 @@ class Assessment_model extends CI_Model {
         }
     }
 
-    public function get_assessment_records($year, $grade)
+    public function get_assessment_records($school_year, $grade)
     {
         $assessment_table   = $this->db->dbprefix('assessment');
         $students_table     = $this->db->dbprefix('students');
@@ -79,7 +79,7 @@ class Assessment_model extends CI_Model {
         $query = $this->db->query('SELECT * '.
                                   'FROM '.$assessment_table.' '.
                                   'NATURAL JOIN '.$students_table.' '.
-                                  'WHERE year=? AND grade=?', array($year, $grade));
+                                  'WHERE school_year=? AND grade=?', array($school_year, $grade));
         if ( $query->num_rows() > 0 ) {
             return $query->result_array();
         } else {
@@ -93,7 +93,7 @@ class Assessment_model extends CI_Model {
      * The function is mainly used for initializing the peer assessment 
      * system when the system is actived.
      * 
-     * @param  Array $record - contains two keys[year, student_id] most 
+     * @param  Array $record - contains two keys[school_year, student_id] most 
      *                         of the time.
      * @return true if the query is successful
      */
@@ -112,7 +112,7 @@ class Assessment_model extends CI_Model {
      */
     public function update($record)
     {
-        $this->db->where('year', $record['year']);
+        $this->db->where('school_year', $record['school_year']);
         $this->db->where('student_id', $record['student_id']);
         return $this->db->update($this->db->dbprefix('assessment'), $record);
     }

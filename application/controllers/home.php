@@ -352,26 +352,27 @@ class Home extends CI_Controller {
      */
     public function get_data_for_assessment()
     {
-        $year = date('Y');
-        $is_peer_assessment_active = $this->get_option('is_peer_assessment_active');
-        $is_participated = $this->lib_evaluation->is_participated($year, $this->profile['student_id']);
+        $school_year                = $this->lib_evaluation->get_current_school_year();
+        $is_peer_assessment_active  = $this->get_option('is_peer_assessment_active');
+        $is_participated            = $this->lib_evaluation->is_participated($school_year, $this->profile['student_id']);
         $students = array();
         if ( $is_peer_assessment_active && !$is_participated ) {
             $students = $this->lib_evaluation->get_students_list_by_class($this->profile['grade'], $this->profile['class']);
         }
 
         $extra = array(
-                'is_participated'   =>  $is_participated,
-                'student_id'        =>  $this->profile['student_id'],
-                'student_name'      =>  $this->profile['student_name'],
-                'grade'             =>  $this->profile['grade'],
-                'class'             =>  $this->profile['class']
-            );
-        $data = array( 
-                    'options'       => $this->options, 
-                    'students'      => $students,
-                    'extra'         => $extra 
-                );
+            'is_participated'   =>  $is_participated,
+            'student_id'        =>  $this->profile['student_id'],
+            'student_name'      =>  $this->profile['student_name'],
+            'grade'             =>  $this->profile['grade'],
+            'class'             =>  $this->profile['class'],
+        );
+        $data = array(
+            'school_year'       => $school_year,
+            'options'           => $this->options, 
+            'students'          => $students,
+            'extra'             => $extra,
+        );
         return $data;
     }
 
@@ -381,28 +382,28 @@ class Home extends CI_Controller {
      */
     public function post_votes()
     {
-        $year = date('Y');
-        $is_peer_assessment_active = $this->get_option('is_peer_assessment_active');
-        $is_participated = $this->lib_evaluation->is_participated($year, $this->profile['student_id']);
-        $result = array(
-                'is_successful'                 => boolval(($is_peer_assessment_active && !$is_participated)),
-                'is_peer_assessment_active'     => boolval($is_peer_assessment_active),
-                'is_participated'               => boolval($is_participated),
-                'is_post_successful'            => false
-            );
+        $school_year                = $this->lib_evaluation->get_current_school_year();
+        $is_peer_assessment_active  = $this->get_option('is_peer_assessment_active');
+        $is_participated            = $this->lib_evaluation->is_participated($school_year, $this->profile['student_id']);
+        $result                     = array(
+            'is_successful'                 => boolval(($is_peer_assessment_active && !$is_participated)),
+            'is_peer_assessment_active'     => boolval($is_peer_assessment_active),
+            'is_participated'               => boolval($is_participated),
+            'is_post_successful'            => false
+        );
 
         if ( $result['is_successful'] ) {
-            $year = date('Y');
-            $students = $this->lib_evaluation->get_students_list_by_class($this->profile['grade'], $this->profile['class']);
-            $posted_votes = array();
+            $school_year    = $this->lib_evaluation->get_current_school_year();
+            $students       = $this->lib_evaluation->get_students_list_by_class($this->profile['grade'], $this->profile['class']);
+            $posted_votes   = array();
             foreach ( $students as $student ) {
                 $student_id = $student['student_id'];
                 if ( $student_id == $this->profile['student_id'] ) {
                     continue;
                 }
-                $posted_votes[$student_id]['moral'] = $this->input->post('moral-'.$student_id);
-                $posted_votes[$student_id]['strength'] = $this->input->post('strength-'.$student_id);
-                $posted_votes[$student_id]['ability'] = $this->input->post('ability-'.$student_id);
+                $posted_votes[$student_id]['moral']     = $this->input->post('moral-'.$student_id);
+                $posted_votes[$student_id]['strength']  = $this->input->post('strength-'.$student_id);
+                $posted_votes[$student_id]['ability']   = $this->input->post('ability-'.$student_id);
             }
             $result['is_post_successful'] = $this->lib_evaluation->post_votes($posted_votes, $students, 
                                                                               $this->profile['student_id'], $this->options);

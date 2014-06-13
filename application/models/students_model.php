@@ -139,6 +139,18 @@ class Students_model extends CI_Model {
 		}
 	}
 
+	public function get_all_students_list()
+	{
+		$this->db->select('student_id, student_name');
+
+		$query = $this->db->get($this->db->dbprefix('students'));
+		if ( $query->num_rows() > 0 ) {
+			return $query->result_array();
+		} else {
+			return false;
+		}
+	}
+
 	/**
 	 * Get the students list in a certain grade.
 	 *

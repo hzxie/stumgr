@@ -161,7 +161,7 @@ class Admin extends CI_Controller {
      *            will invoke a function when the page is loaded.
      *            So, you CANNOT remove this function.
      */
-    public function get_data_for_addusers() { }
+    public function get_data_for_add_users() { }
 
     /**
      * Add a user from the form.
@@ -266,7 +266,7 @@ class Admin extends CI_Controller {
      * Get data for editusers.php page.
      * @return an array which contains data which the page needs
      */
-    public function get_data_for_editusers() 
+    public function get_data_for_edit_users() 
     {
         $available_grades = $this->lib_accounts->get_available_grades();
         $user_groups = $this->lib_accounts->get_user_groups_list();
@@ -444,7 +444,7 @@ class Admin extends CI_Controller {
      * Get data for the scoresettings.php page.
      * @return an array which contains data which the page needs
      */
-    public function get_data_for_scoresettings()
+    public function get_data_for_score_settings()
     {
         
     }
@@ -498,12 +498,29 @@ class Admin extends CI_Controller {
      * Get data for the evaluationsettings.php page.
      * @return an array which contains data which the page needs
      */
-    public function get_data_for_evaluationsettings()
+    public function get_data_for_evaluation_settings()
     {
         $data = array(
             'options'   => $this->options
         );
         return $data;
+    }
+
+    /**
+     * 打开/关闭学生互评系统.
+     *
+     * 若是本年度第一次使用该系统, 系统会初始化. 即在数据库中为每一个学生用户创建一
+     * 条空记录.
+     * 
+     * @return 一个包含若干标志位的数组
+     */
+    public function switch_is_peer_assessment_active()
+    {
+        $is_peer_assessment_active  = $this->input->post('is_peer_assessment_active');
+        $result = array(
+            'is_successful' => $this->lib_evaluation->switch_is_peer_assessment_active($is_peer_assessment_active),
+        );
+        echo json_encode($result);
     }
 
     /**
@@ -525,9 +542,9 @@ class Admin extends CI_Controller {
         return $data;
     }
 
-    public function get_assessment_records($year, $grade)
+    public function get_assessment_records($school_year, $grade)
     {
-        $assessment_records = $this->lib_evaluation->get_assessment_records($year, $grade);
+        $assessment_records = $this->lib_evaluation->get_assessment_records($school_year, $grade);
         $result = array(
             'is_successful' => ($assessment_records != false),
             'records'       => $assessment_records

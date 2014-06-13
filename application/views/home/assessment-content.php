@@ -1,5 +1,5 @@
-<link rel="stylesheet" media="screen" href="<?php echo base_url(); ?>assets/css/messenger.css">
-<link rel="stylesheet" media="screen" href="<?php echo base_url(); ?>assets/css/messenger-theme-future.css">
+<link rel="stylesheet" media="screen" href="<?php echo base_url(); ?>assets/css/home/messenger.css">
+<link rel="stylesheet" media="screen" href="<?php echo base_url(); ?>assets/css/home/messenger-theme-future.css">
 
 <div class="alert alert-info">
     <?php
@@ -12,7 +12,7 @@
         $max_number_of_medium_students    = floor($number_of_students * $options['max_medium_percents']);
     ?>
     <strong>温馨提示: </strong>
-    <?php echo $extra['student_name']; ?>同学您好, 欢迎参加合肥工业大学<?php echo date('Y'); ?>年综合测评.<br />
+    <?php echo $extra['student_name']; ?>同学您好, 欢迎参加合肥工业大学<?php echo $school_year ?>~<?php echo ($school_year + 1) ?>学年综合测评.<br />
     您所在的班级是<?php echo $extra['grade']; ?>级<?php echo $extra['class']; ?>班, 共有学生<?php echo $number_of_students ?>人.<br />
     因此各项优秀人数应在<?php echo $min_number_of_excellent_students.'~'.$max_number_of_excellent_students; ?>人之间,
             良好人数应在<?php echo $min_number_of_good_students.'~'.$max_number_of_good_students; ?>人之间,

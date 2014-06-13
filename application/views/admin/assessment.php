@@ -6,8 +6,8 @@
         <select id="available-years" class="span2">
             <?php
                 foreach ( $available_years as $available_year ) {
-                    $year = $available_year['year'];
-                    echo '<option value="'.$year.'">'.($year - 1).'-'.$year.'学年</option>';
+                    $year = $available_year['school_year'];
+                    echo '<option value="'.$year.'">'.$year.'-'.($year + 1).'学年</option>';
                 }
             ?>
         </select>
@@ -51,11 +51,11 @@
 </div> <!-- /assessment-content -->
 
 <script type="text/javascript">
-    function get_assessment_records(year, grade) {
+    function get_assessment_records(school_year, grade) {
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/get_assessment_records/'; ?>" + year + '/' + grade,
+            url: "<?php echo base_url().'admin/get_assessment_records/'; ?>" + school_year + '/' + grade,
             dataType: 'JSON',
             success: function(result) {
                 console.log(result);
@@ -104,10 +104,10 @@
 </script>
 <script type="text/javascript">
     function prepare_get_assessment_records() {
-        var year   = $('#available-years').val(),
-            grade  = $('#available-grades').val();
+        var school_year = $('#available-years').val(),
+            grade       = $('#available-grades').val();
 
-        get_assessment_records(year, grade);
+        get_assessment_records(school_year, grade);
     }
 </script>
 <script type="text/javascript">

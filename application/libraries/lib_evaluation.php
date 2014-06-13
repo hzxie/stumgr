@@ -18,6 +18,7 @@ class Lib_evaluation {
         $this->__CI =& get_instance();
         $this->__CI->load->model('Students_model');
         $this->__CI->load->model('Assessment_model');
+        $this->__CI->load->model('Options_model');
     }
 
     /**
@@ -75,20 +76,60 @@ class Lib_evaluation {
         return array_reverse($available_grades);
     }
 
-    public function get_assessment_records($year, $grade)
+    public function get_assessment_records($school_year, $grade)
     {
-        return $this->__CI->Assessment_model->get_assessment_records($year, $grade);
+        return $this->__CI->Assessment_model->get_assessment_records($school_year, $grade);
+    }
+
+    /**
+     * 打开/关闭学生互评系统.
+     *
+     * 若是本年度第一次使用该系统, 系统会初始化. 即在数据库中为每一个学生用户创建一
+     * 条空记录.
+     * 
+     * @return 系统状态是否成功切换
+     */
+    public function switch_is_peer_assessment_active($is_peer_assessment_active)
+    {
+        if ( $is_peer_assessment_active ) {
+            $students_list  = $this->__CI->Students_model->get_all_students_list();
+            foreach ( $students_list as $student ) {
+                $record     = array(
+                    'school_year'   => $this->get_current_school_year(),
+                    'student_id'    => $student['student_id'],
+                );
+
+                if ( !$this->is_record_exists($record) ) {
+                    $this->__CI->Assessment_model->insert($record);
+                }
+            }
+        }
+        $this->update_is_peer_assessment_active($is_peer_assessment_active);
+
+        return true;
+    }
+
+    private function is_record_exists($record)
+    {
+        $school_year = $record['school_year'];
+        $student_id  = $record['student_id'];
+        return $this->__CI->Assessment_model->select($school_year, $student_id);
+    }
+
+    private function update_is_peer_assessment_active($is_peer_assessment_active)
+    {
+        return $this->__CI->Options_model->update( 'is_peer_assessment_active', $is_peer_assessment_active );
     }
 
     /**
      * [is_participated description]
-     * @param  int     $year - the year when the peer assessment carried on
+     * @param  int     $school_year - the school year when the peer assessment carried on
      * @param  String  $student_id - the student id of the student
      * @return true if the student has participated in the peer assessment
      */
-    public function is_participated($year, $student_id)
+    public function is_participated($school_year, $student_id)
     {
-        $assessment = $this->__CI->Assessment_model->select($year, $student_id);
+        $assessment = $this->__CI->Assessment_model->select($school_year, $student_id);
         return $assessment['is_participated'];
     }
 
@@ -118,10 +159,10 @@ class Lib_evaluation {
             return false;
         }
 
-        $year = date('Y');
+        $school_year = $this->get_current_school_year();
         foreach ( $students as $student ) {
-            $student_id = $student['student_id'];
-            $current_votes = $this->__CI->Assessment_model->select($year, $student_id);
+            $student_id     = $student['student_id'];
+            $current_votes  = $this->__CI->Assessment_model->select($school_year, $student_id);
             if ( $student_id == $voter_student_id ) {
                 $current_votes['is_participated'] = true;
             } else {

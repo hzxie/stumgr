@@ -1,0 +1,4 @@
+table tr td:first-child {
+	font-weight: bold;
+	width: 300px;
+}
