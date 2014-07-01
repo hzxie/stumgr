@@ -255,7 +255,7 @@ class Lib_accounts {
     {
         $result['is_required_empty'] = empty($user_information['student_id']);
 
-        $result['is_information_legal'] = (strlen($user_information['student_name']) <= 24) &&
+        $result['is_information_legal'] = (mb_strlen($user_information['student_name'], 'utf-8') <= 24) &&
                                           (strlen($user_information['password']) <= 16) &&
                                           (strlen($user_information['room']) < 8) &&
                                           preg_match('/^[0-9]{8,10}$/', $user_information['student_id']) &&
@@ -501,7 +501,7 @@ class Lib_accounts {
     private function verify_profile_information($profile, &$result)
     {
         $result['is_student_name_empty'] = empty($profile['student_name']);
-        $result['is_student_name_legal'] = ( strlen($profile['student_name']) <= 24 );
+        $result['is_student_name_legal'] = ( mb_strlen($profile['student_name'], 'utf-8') <= 24 );
         $result['is_grade_empty']        = empty($profile['grade']);
         $result['is_grade_legal']        = preg_match('/^[0-9]{4}$/', $profile['grade']);
         $result['is_class_empty']        = empty($profile['class']);
