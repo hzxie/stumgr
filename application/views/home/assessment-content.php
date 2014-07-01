@@ -169,6 +169,7 @@
                 if ( result['is_successful'] ) {
                     load('assessment');
                     $.globalMessenger().hideAll();
+                    set_loading_mode(false);
                 } else {
                     if ( !result['is_peer_assessment_active'] ) {
                         post_error_message('学生互评系统已关闭, 请与系统管理员联系.');
