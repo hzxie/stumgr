@@ -63,7 +63,14 @@ class Lib_evaluation {
      */
     public function get_available_years_for_assessment()
     {
-        return array_reverse( $this->__CI->Assessment_model->get_available_years() );
+        $available_years        = $this->__CI->Assessment_model->get_available_years();
+        $current_size           = count($available_years);
+        $current_school_year    = $this->get_current_school_year();
+
+        if ( !$this->__CI->lib_utils->in_array($available_years, 'school_year', $current_school_year) ) {
+            $available_years[$current_size]['school_year'] = $current_school_year;
+        }
+        return array_reverse($available_years);
     }
 
     /**
@@ -72,7 +79,13 @@ class Lib_evaluation {
      */
     public function get_available_grades()
     {
-        $available_grades = $this->__CI->Students_model->get_available_grades();
+        $available_grades       = $this->__CI->Students_model->get_available_grades();
+        $current_size           = count($available_grades);
+        $current_school_year    = $this->get_current_school_year();
+
+        if ( !$this->__CI->lib_utils->in_array($available_grades, 'grade', $current_school_year) ) {
+            $available_grades[$current_size]['grade'] = $current_school_year;
+        }
         return array_reverse($available_grades);
     }
 

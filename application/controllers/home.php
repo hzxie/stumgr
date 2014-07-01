@@ -47,10 +47,10 @@ class Home extends CI_Controller {
     {
         $this->profile = $this->lib_accounts->get_profile($student_id);
         $this->profile += array(
-                'username'          => $student_id,
-                'display_name'      => $this->profile['student_name'],
-                'is_administrator'  => false
-            );
+            'username'          => $student_id,
+            'display_name'      => $this->profile['student_name'],
+            'is_administrator'  => false
+        );
     }
 
     /**
