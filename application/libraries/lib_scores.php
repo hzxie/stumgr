@@ -18,6 +18,8 @@ class Lib_scores {
         $this->__CI =& get_instance();
         $this->__CI->load->model('Students_model');
         $this->__CI->load->model('Scores_model');
+        $this->__CI->load->model('Courses_model');
+        $this->__CI->load->model('Education_plans_model');
 
         $this->__CI->load->library('lib_utils');
     }
@@ -49,7 +51,7 @@ class Lib_scores {
      */
     public function get_available_years($student_id)
     {
-        $available_years    = $this->__CI->Scores_model->get_available_years($student_id);
+        $available_years = $this->__CI->Scores_model->get_available_years($student_id);
         return $available_years;
     }
 
@@ -63,13 +65,41 @@ class Lib_scores {
      */
     public function get_all_available_years()
     {
-        $available_years    = $this->__CI->Scores_model->get_all_available_years();
+        $available_years = $this->__CI->Scores_model->get_all_available_years();
         return $available_years;
     }
 
-    public function get_transcripts_records_by_students($school_year, $semester, $student_id)
+    /**
+     * Get available grades to select from existing data.
+     * @return an array contains all available grades
+     */
+    public function get_available_grades()
     {
-        $transcripts_records = $this->__CI->Scores_model->get_transcripts_records_by_students($school_year, $semester, $student_id);
+        $available_grades       = $this->__CI->Students_model->get_available_grades();
+        $current_size           = count($available_grades);
+        $current_school_year    = $this->get_current_school_year();
+
+        if ( !$this->__CI->lib_utils->in_array($available_grades, 'grade', $current_school_year) ) {
+            $available_grades[$current_size]['grade'] = $current_school_year;
+        }
+        return array_reverse($available_grades);
+    }
+
+    public function get_all_courses() 
+    {
+        $courses = $this->__CI->Courses_model->get_all_courses();
+        return $courses;
+    }
+
+    public function get_available_courses($school_year, $grade)
+    {
+        $available_courses = $this->__CI->Education_plans_model->get_available_courses($school_year, $grade);
+        return $available_courses;
+    }
+
+    public function get_transcripts_records_by_student($school_year, $semester, $student_id)
+    {
+        $transcripts_records = $this->__CI->Scores_model->get_transcripts_records_by_student($school_year, $semester, $student_id);
         if ( $transcripts_records ) {
             foreach ( $transcripts_records as &$record ) {
                 $record['grade_point'] = $this->get_grade_point($record['final_score'], $record['is_hierarchy'], $record['is_passed']);
@@ -85,6 +115,19 @@ class Lib_scores {
                 if ( $record['paper_score'] == null ) {
                     $record['paper_score'] = '';
                 }
+                if ( $record['is_hierarchy'] ) {
+                    $record['final_score'] = $this->get_rank($record['final_score']);
+                }
+            }
+        }
+        return $transcripts_records;
+    }
+
+    public function get_transcripts_records_by_grade($grade, $course_id)
+    {
+        $transcripts_records = $this->__CI->Scores_model->get_transcripts_records_by_grade($grade, $course_id);
+        if ( $transcripts_records ) {
+            foreach ( $transcripts_records as &$record ) {
                 if ( $record['is_hierarchy'] ) {
                     $record['final_score'] = $this->get_rank($record['final_score']);
                 }

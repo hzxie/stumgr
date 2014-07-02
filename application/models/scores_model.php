@@ -18,6 +18,34 @@ class Scores_model extends CI_Model {
         $this->load->database();
     }
 
+    public function get_all_available_years()
+    {
+        $this->db->distinct();
+        $this->db->select('school_year');
+        $this->db->order_by('school_year', 'desc');
+        $query = $this->db->get($this->db->dbprefix('scores'));
+        if ( $query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function get_available_years($student_id)
+    {
+        $this->db->distinct();
+        $this->db->select('school_year');
+        $this->db->where('student_id', $student_id);
+        $this->db->order_by('school_year', 'desc');
+
+        $query = $this->db->get($this->db->dbprefix('scores'));
+        if ( $query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Insert a record to the scores table.
      * @param  Array $record - an array contains a score record to insert
@@ -28,7 +56,7 @@ class Scores_model extends CI_Model {
         return $this->db->insert($this->db->dbprefix('scores'), $record);
     }
 
-    public function get_transcripts_records_by_students($school_year, $semester, $student_id)
+    public function get_transcripts_records_by_student($school_year, $semester, $student_id)
     {
         $scores_table  = $this->db->dbprefix('scores');
         $courses_table = $this->db->dbprefix('courses');
@@ -54,27 +82,21 @@ class Scores_model extends CI_Model {
         }
     }
 
-    public function get_all_available_years()
+    public function get_transcripts_records_by_grade($grade, $course_id)
     {
-        $this->db->distinct();
-        $this->db->select('school_year');
-        $this->db->order_by('school_year', 'desc');
-        $query = $this->db->get($this->db->dbprefix('scores'));
-        if ( $query->num_rows() > 0 ) {
-            return $query->result_array();
-        } else {
-            return false;
-        }
-    }
+        $scores_table   = $this->db->dbprefix('scores');
+        $students_table = $this->db->dbprefix('students');
 
-    public function get_available_years($student_id)
-    {
-        $this->db->distinct();
-        $this->db->select('school_year');
-        $this->db->where('student_id', $student_id);
-        $this->db->order_by('school_year', 'desc');
-
-        $query = $this->db->get($this->db->dbprefix('scores'));
+        $query = $this->db->query('SELECT *, (1 + (SELECT COUNT(*) '.
+                                                  'FROM '.$scores_table.' B '.
+                                                  'WHERE B.course_id = A.course_id AND '.
+                                                  'B.school_year = A.school_year AND '.
+                                                  'B.semester = A.semester AND '.
+                                                  'B.final_score > A.final_score)) AS ranking '.
+                                  'FROM '.$scores_table.' A '.
+                                  'NATURAL JOIN '.$students_table.' '.
+                                  'WHERE grade=? AND course_id=? '.
+                                  'ORDER BY final_score DESC', array($grade, $course_id));
         if ( $query->num_rows() > 0 ) {
             return $query->result_array();
         } else {

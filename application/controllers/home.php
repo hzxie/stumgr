@@ -328,7 +328,7 @@ class Home extends CI_Controller {
         $student_id             = $this->profile['student_id'];
         $transcripts_records    = array();
 
-        $transcripts_records    = $this->lib_scores->get_transcripts_records_by_students($school_year, $semester, $student_id);
+        $transcripts_records    = $this->lib_scores->get_transcripts_records_by_student($school_year, $semester, $student_id);
 
         $result = array(
                 'is_successful' => ($transcripts_records != false),

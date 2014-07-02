@@ -3,7 +3,7 @@
 </div> <!-- /edit-users-header -->
 <div id="edit-users-section" class="section">
     <?php if ( isset($available_grades) && $available_grades ): ?>
-    	<?php require_once(APPPATH.'views/admin/editusers-content.php'); ?>
+    	<?php require_once(APPPATH.'views/admin/editusers_content.php'); ?>
     <?php else: ?>
         <div class="alert alert-error"><strong>温馨提示: </strong>暂无可用数据.</div>
     <?php endif; ?>

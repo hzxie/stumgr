@@ -26,6 +26,7 @@
                 <tr>
                     <td rowspan="2">学号</td>
                     <td rowspan="2">姓名</td>
+                    <td rowspan="2">已测评</td>
                     <td colspan="4" class="left-border text-center">道德(<?php echo $options['moral_percents'] * 100 ?>%)</td>
                     <td colspan="4" class="left-border text-center">体育(<?php echo $options['strength_percents'] * 100 ?>%)</td>
                     <td colspan="4" class="left-border text-center">能力(<?php echo $options['ability_percents'] * 100 ?>%)</td>
@@ -58,7 +59,6 @@
             url: "<?php echo base_url().'admin/get_assessment_records/'; ?>" + school_year + '/' + grade,
             dataType: 'JSON',
             success: function(result) {
-                console.log(result);
                 $('#assessment-records tbody').empty();
                 if ( result['is_successful'] ) {
                     var total_records = result['records'].length;
@@ -67,6 +67,7 @@
                             '<tr class="table-datum">' + 
                             '<td>' + result['records'][i]['student_id'] + '</td>' + 
                             '<td>' + result['records'][i]['student_name'] + '</td>' + 
+                            '<td>' + (result['records'][i]['is_participated'] === '1' ? '是' : '否') + '</td>' + 
                             '<td class="left-border">' + result['records'][i]['moral_excellent'] + '</td>' + 
                             '<td>' + result['records'][i]['moral_good'] + '</td>' + 
                             '<td>' + result['records'][i]['moral_medium'] + '</td>' + 

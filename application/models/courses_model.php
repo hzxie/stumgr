@@ -4,7 +4,9 @@
  * The model is for the stumgr_courses table in the database.
  *
  * The structure of stumgr_courses:
- *     school_year      -- INT(4)       -- NOT NULL
+ *     course_id        -- VARCHAR(8)       -- NOT NULL --  [PRIMARY]
+ *     course_name      -- VARCHAR(64)      -- NOT NULL
+ *     credits          -- FLOAT            -- NOT NULL
  *
  * @author  Xie Haozhe <zjhzxhz@gmail.com>
  */
@@ -16,6 +18,16 @@ class Courses_model extends CI_Model {
     {
         parent::__construct(); 
         $this->load->database();
+    }
+
+    public function get_all_courses() 
+    {
+        $query = $this->db->get($this->db->dbprefix('courses'));
+        if ( $query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return false;
+        }
     }
 }
 

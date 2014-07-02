@@ -446,7 +446,12 @@ class Admin extends CI_Controller {
      */
     public function get_data_for_score_settings()
     {
-        
+        $data = array( 
+            'available_years'   => $this->lib_scores->get_all_available_years(),
+            'available_grades'  => $this->lib_scores->get_available_grades(),
+            'courses'           => $this->lib_scores->get_all_courses(),
+        );
+        return $data;
     }
 
     /**
@@ -476,13 +481,39 @@ class Admin extends CI_Controller {
         echo json_encode($result);
     }
 
+    public function get_available_courses($school_year, $grade)
+    {
+        $available_courses = $this->lib_scores->get_available_courses($school_year, $grade);
+        $result = array(
+            'is_successful'     => ( $available_courses != false ),
+            'available_courses' => $available_courses,
+        );
+
+        echo json_encode($result);
+    }
+
     /**
      * Get data for the transcripts.php page.
      * @return an array which contains data which the page needs
      */
     public function get_data_for_transcripts()
     {
-        
+        $data = array( 
+            'available_years'   => $this->lib_scores->get_all_available_years(),
+            'available_grades'  => $this->lib_scores->get_available_grades(),
+        );
+        return $data;
+    }
+
+    public function get_transcripts_records($grade, $course_id)
+    {
+        $transcripts_records    = $this->lib_scores->get_transcripts_records_by_grade($grade, $course_id);
+        $result = array(
+            'is_successful'     => ( $transcripts_records != false ),
+            'records'           => $transcripts_records,
+        );
+
+        echo json_encode($result);
     }
 
     /**
