@@ -20,7 +20,7 @@ class Education_plans_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get_available_courses($school_year, $grade)
+    public function get_education_plan($school_year, $grade)
     {
         $courses_table          = $this->db->dbprefix('courses');
         $education_plans_table  = $this->db->dbprefix('education_plans');
@@ -34,6 +34,20 @@ class Education_plans_model extends CI_Model {
         } else {
             return false;
         }
+    }
+
+    public function insert($education_plan)
+    {
+        return $this->db->insert($this->db->dbprefix('education_plans'), $education_plan);
+    }
+
+    public function delete($education_plan)
+    {
+        $this->db->where('school_year', $education_plan['school_year']);
+        $this->db->where('grade', $education_plan['grade']);
+        $this->db->where('course_id', $education_plan['course_id']);
+
+        return $this->db->delete($this->db->dbprefix('education_plans')); 
     }
 }
 

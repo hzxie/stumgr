@@ -7,7 +7,7 @@
     <ul class="nav nav-tabs">
         <li id="scores-nav" class="active"><a href="javascript:void(0)">导入成绩</a></li>
         <li id="courses-nav"><a href="javascript:void(0)">课程设置</a></li>
-        <li id="education-plan-nav"><a href="javascript:void(0)">教学计划</a></li>
+        <li id="plan-nav"><a href="javascript:void(0)">教学计划</a></li>
     </ul>
     <div class="tab-content">
         <div id="scores-tab" class="tab-pane active">
@@ -51,8 +51,8 @@
                 </table>
             </div> <!-- /list -->
         </div> <!-- /courses-tab -->
-        <div id="education-plan-tab" class="tab-pane">
-            <div id="education-plan-header" class="page-header">
+        <div id="plan-tab" class="tab-pane">
+            <div id="plan-header" class="page-header">
                 <h2>教学计划</h2>
             </div> <!-- /education-plan-header -->
             <div id="selector">
@@ -73,16 +73,17 @@
                     ?>
                 </select>
             </div> <!-- /selector -->
-            <div id="courses">
-                <select id="all-courses-list" multiple="multiple" style="height: 300px;">
-                    <?php if ($courses): ?>
-                        <?php foreach ( $courses as $course ) { ?>
-                        <option value="<?php echo $course['course_id']; ?>"><?php echo $course['course_name']; ?></option>
-                        <?php } ?>
-                    <?php endif; ?>
-                </select>
-                <select id="selected-courses-list" multiple="multiple" style="height: 300px;">
-                </select>
+            <div id="courses" style="overflow: hidden;">
+                <div id="all-courses" style="float: left; margin-right: 20px;">
+                    <select id="all-courses-list" multiple="multiple" style="height: 300px;"></select>
+                </div> <!-- #all-courses -->
+                <div id="<operator></operator>" style="float: left; margin-right: 20px; width: 40px;">
+                    <p><button id="add-selected-courses" class="btn">-&gt;</button></p>
+                    <p><button id="remove-selected-courses" class="btn">&lt;-</button></p>
+                </div> <!-- #operator -->
+                <div id="selected-courses" style="float: left; margin-right: 20px;">
+                    <select id="selected-courses-list" multiple="multiple" style="height: 300px;"></select>
+                </div> <!-- #selected-courses -->
             </div> <!-- /courses -->
         </div> <!-- /education-plan-tab -->
     </div>
@@ -90,28 +91,28 @@
 
 <script type="text/javascript">
     $('#scores-nav').click(function(){
-        $('#education-plan-nav').removeClass('active');
-        $('#education-plan-tab').removeClass('active');
+        $('#plan-nav').removeClass('active');
+        $('#plan-tab').removeClass('active');
         $('#courses-nav').removeClass('active');
         $('#courses-tab').removeClass('active');
         $('#scores-nav').addClass('active');
         $('#scores-tab').addClass('active');
         set_footer_position();
     });
-    $('#education-plan-nav').click(function(){
+    $('#plan-nav').click(function(){
         $('#scores-nav').removeClass('active');
         $('#scores-tab').removeClass('active');
         $('#courses-nav').removeClass('active');
         $('#courses-tab').removeClass('active');
-        $('#education-plan-nav').addClass('active');
-        $('#education-plan-tab').addClass('active');
+        $('#plan-nav').addClass('active');
+        $('#plan-tab').addClass('active');
         set_footer_position();
     });
     $('#courses-nav').click(function(){
         $('#scores-nav').removeClass('active');
         $('#scores-tab').removeClass('active');
-        $('#education-plan-nav').removeClass('active');
-        $('#education-plan-tab').removeClass('active');
+        $('#plan-nav').removeClass('active');
+        $('#plan-tab').removeClass('active');
         $('#courses-nav').addClass('active');
         $('#courses-tab').addClass('active');
         set_footer_position();
@@ -140,6 +141,124 @@
                 } else {
                     $('.fileUploader-upload-status-text').last().html('部分学生的成绩未能成功导入. <a href="#logs"><small>查看详情</small></a>');
                 }
+            }
+        });
+    });
+</script>
+<!-- JavaScript for education plans tab -->
+<script type="text/javascript">
+    function get_all_courses() {
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: "<?php echo base_url().'admin/get_all_courses'; ?>",
+            dataType: 'JSON',
+            success: function(result) {
+                $('#all-courses-list').empty();
+                if ( result['is_successful'] ) {
+                    var total_records = result['courses'].length;
+                    for ( var i = 0; i < total_records; ++ i ) {
+                        $('#all-courses-list').append(
+                            '<option value="' + result['courses'][i]['course_id'] + '">' +
+                            result['courses'][i]['course_name'] +
+                            '</option>'
+                        );
+                    }
+                }
+                prepare_get_education_plan();
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function get_education_plan(school_year, grade) {
+        $.ajax({
+            type: 'GET',
+            async: true,
+            url: "<?php echo base_url().'admin/get_available_courses/'; ?>" + school_year + '/' + grade,
+            dataType: 'JSON',
+            success: function(result) {
+                $('#selected-courses-list').empty();
+                if ( result['is_successful'] ) {
+                    var total_records = result['available_courses'].length;
+                    for ( var i = 0; i < total_records; ++ i ) {
+                        var course_id       = result['available_courses'][i]['course_id'],
+                            option_object   = $('option[value=' + course_id + ']');
+
+                        $('#selected-courses-list').append(option_object);
+                    }
+                }
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function prepare_get_education_plan() {
+        var school_year = $('#available-years').val(),
+            grade       = $('#available-grades').val();
+
+        return get_education_plan(school_year, grade);
+    }
+</script>
+<script type="text/javascript">
+    $('select#available-years').change(function() {
+        get_all_courses();
+    });
+</script>
+<script type="text/javascript">
+    $('select#available-grades').change(function() {
+        get_all_courses();
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        get_all_courses();
+    });
+</script>
+<script type="text/javascript">
+    $('#add-selected-courses').click(function() {
+        $('#all-courses-list option').each(function() {
+            if ( $(this).is(':selected') ) {
+                var option_object   = $(this),
+                    school_year     = $('#available-years').val(),
+                    grade           = $('#available-grades').val(),
+                    course_id       = $(option_object).val(),
+                    post_data       = 'school_year=' + school_year + '&grade=' + grade +
+                                      '&course_id=' + course_id;
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "<?php echo base_url().'admin/add_education_plan'; ?>",
+                    data: post_data,
+                    dataType: 'JSON',
+                    success: function(result) {
+                        $('#selected-courses-list').append( $(option_object) );
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $('#remove-selected-courses').click(function() {
+        $('#selected-courses-list option').each(function() {
+            if ( $(this).is(':selected') ) {
+                var option_object   = $(this),
+                    school_year     = $('#available-years').val(),
+                    grade           = $('#available-grades').val(),
+                    course_id       = $(option_object).val(),
+                    post_data       = 'school_year=' + school_year + '&grade=' + grade +
+                                      '&course_id=' + course_id;
+                $.ajax({
+                    type: 'POST',
+                    async: true,
+                    url: "<?php echo base_url().'admin/delete_education_plan'; ?>",
+                    data: post_data,
+                    dataType: 'JSON',
+                    success: function(result) {
+                        $('#all-courses-list').append( $(option_object) );
+                    }
+                });
             }
         });
     });

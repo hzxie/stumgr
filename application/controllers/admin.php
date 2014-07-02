@@ -454,6 +454,17 @@ class Admin extends CI_Controller {
         return $data;
     }
 
+    public function get_all_courses()
+    {
+        $courses = $this->lib_scores->get_all_courses();
+        $result = array(
+            'is_successful'             => ( $courses != false ),
+            'courses'                   => $courses,
+        );
+
+        echo json_encode($result);
+    }
+
     /**
      * Handle administrators' import scores requests.
      * @return an array which contains the query flags
@@ -483,10 +494,36 @@ class Admin extends CI_Controller {
 
     public function get_available_courses($school_year, $grade)
     {
-        $available_courses = $this->lib_scores->get_available_courses($school_year, $grade);
+        $available_courses = $this->lib_scores->get_education_plan($school_year, $grade);
         $result = array(
             'is_successful'     => ( $available_courses != false ),
             'available_courses' => $available_courses,
+        );
+
+        echo json_encode($result);
+    }
+
+    public function add_education_plan()
+    {
+        $school_year        = $this->input->post('school_year');
+        $grade              = $this->input->post('grade');
+        $course_id          = $this->input->post('course_id');
+
+        $result = array(
+            'is_successful' => $this->lib_scores->add_education_plan($school_year, $grade, $course_id),
+        );
+
+        echo json_encode($result);
+    }
+
+    public function delete_education_plan()
+    {
+        $school_year        = $this->input->post('school_year');
+        $grade              = $this->input->post('grade');
+        $course_id          = $this->input->post('course_id');
+
+        $result = array(
+            'is_successful' => $this->lib_scores->delete_education_plan($school_year, $grade, $course_id),
         );
 
         echo json_encode($result);

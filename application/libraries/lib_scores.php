@@ -91,10 +91,32 @@ class Lib_scores {
         return $courses;
     }
 
-    public function get_available_courses($school_year, $grade)
+    public function get_education_plan($school_year, $grade)
     {
-        $available_courses = $this->__CI->Education_plans_model->get_available_courses($school_year, $grade);
+        $available_courses = $this->__CI->Education_plans_model->get_education_plan($school_year, $grade);
         return $available_courses;
+    }
+
+    public function add_education_plan($school_year, $grade, $course_id)
+    {
+        $education_plan = array(
+            'school_year'   => $school_year,
+            'grade'         => $grade,
+            'course_id'     => $course_id,
+        );
+        $this->__CI->Education_plans_model->insert($education_plan);
+        return true;
+    }
+
+    public function delete_education_plan($school_year, $grade, $course_id)
+    {
+        $education_plan = array(
+            'school_year'   => $school_year,
+            'grade'         => $grade,
+            'course_id'     => $course_id,
+        );
+        $this->__CI->Education_plans_model->delete($education_plan);
+        return true;
     }
 
     public function get_transcripts_records_by_student($school_year, $semester, $student_id)
