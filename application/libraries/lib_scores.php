@@ -209,10 +209,14 @@ class Lib_scores {
                 'course_type'   => (int)$record[7],
                 'paper_score'   => $this->get_score($record[13]),
                 'final_score'   => $final_score,
-                'is_hierarchy'  => ( $record[15][0] == 'Z' ? true : false ),
+                'is_hierarchy'  => $this->start_with((string)$record[15], 'Z'),
                 'is_passed'     => ( $final_score >= 60 ? true : ( (string)$record[17] == 'Y11' ? true :  false) )
             );
         return $score;
+    }
+
+    private function start_with($str, $needle) {
+        return strpos($str, $needle) === 0;
     }
 
     /**
