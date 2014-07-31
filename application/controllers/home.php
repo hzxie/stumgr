@@ -391,9 +391,9 @@ class Home extends CI_Controller {
         $is_peer_assessment_active  = $this->get_option('is_peer_assessment_active');
         $is_participated            = $this->lib_evaluation->is_participated($school_year, $this->profile['student_id']);
         $result                     = array(
-            'is_successful'                 => boolval(($is_peer_assessment_active && !$is_participated)),
-            'is_peer_assessment_active'     => boolval($is_peer_assessment_active),
-            'is_participated'               => boolval($is_participated),
+            'is_successful'                 => $this->boolval(($is_peer_assessment_active && !$is_participated)),
+            'is_peer_assessment_active'     => $this->boolval($is_peer_assessment_active),
+            'is_participated'               => $this->boolval($is_participated),
             'is_post_successful'            => false
         );
 
@@ -416,6 +416,14 @@ class Home extends CI_Controller {
         }
 
         echo json_encode($result);
+    }
+
+    private function boolval($boolval)
+    {
+        if ( !function_exists(boolval) ) {
+            return $boolval === '1';
+        }
+        return boolval($boolval);
     }
 
     /**
@@ -468,17 +476,21 @@ class Home extends CI_Controller {
 
         $result             = $this->lib_rewards->add_reward_record($this->profile['student_id'], 
                                                                     $reward_level_id, $detail, $additional_score);
-        
-        var_dump($result);
+        echo json_encode($result);
     }
 
     /**
+     * @todo fix available_years
      * Get data for the result.php page.
      * @return an array which contains data which the page needs
      */
     public function get_data_for_result()
     {
-
+        $data = array(
+            'available_years'   => $this->lib_evaluation->get_available_years_for_assessment(),
+            'options'           => $this->options, 
+        );
+        return $data;
     }
 }
 
