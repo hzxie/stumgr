@@ -82,7 +82,7 @@ class Scores_model extends CI_Model {
         }
     }
 
-    public function get_transcripts_records_by_grade($grade, $course_id)
+    public function get_transcripts_records_by_grade_and_course_id($grade, $course_id)
     {
         $scores_table   = $this->db->dbprefix('scores');
         $students_table = $this->db->dbprefix('students');
@@ -97,6 +97,23 @@ class Scores_model extends CI_Model {
                                   'NATURAL JOIN '.$students_table.' '.
                                   'WHERE grade=? AND course_id=? '.
                                   'ORDER BY final_score DESC', array($grade, $course_id));
+        if ( $query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function get_transcripts_records_by_grade($school_year, $grade)
+    {
+        $scores_table   = $this->db->dbprefix('scores');
+        $students_table = $this->db->dbprefix('students');
+
+        $query = $this->db->query('SELECT * '.
+                                  'FROM '.$scores_table.' '.
+                                  'NATURAL JOIN '.$students_table.' '.
+                                  'WHERE school_year=? AND grade=?', array($school_year, $grade));
+
         if ( $query->num_rows() > 0 ) {
             return $query->result_array();
         } else {

@@ -73,11 +73,11 @@
     }
 </script>
 <script type="text/javascript">
-    function get_transcripts_records(grade, course_id) {
+    function get_transcripts_records(school_year, grade, course_id) {
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/get_transcripts_records/'; ?>" + grade + '/' + course_id,
+            url: "<?php echo base_url().'admin/get_transcripts_records/'; ?>" + school_year + '/' + grade + '/' + course_id,
             dataType: 'JSON',
             success: function(result) {
                 console.log(result);
@@ -125,10 +125,11 @@
 </script>
 <script type="text/javascript">
     function prepare_get_trascripts_records() {
-        var grade       = $('#available-grades').val(),
+        var school_year = $('#available-years').val(),
+            grade       = $('#available-grades').val(),
             course_id   = $('#available-courses').val();
 
-        return get_transcripts_records(grade, course_id);
+        return get_transcripts_records(school_year, grade, course_id);
     }
 </script>
 <script type="text/javascript">

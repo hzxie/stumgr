@@ -542,9 +542,9 @@ class Admin extends CI_Controller {
         return $data;
     }
 
-    public function get_transcripts_records($grade, $course_id)
+    public function get_transcripts_records($school_year, $grade, $course_id)
     {
-        $transcripts_records    = $this->lib_scores->get_transcripts_records_by_grade($grade, $course_id);
+        $transcripts_records    = $this->lib_scores->get_transcripts_records_by_grade($school_year, $grade, $course_id);
         $result = array(
             'is_successful'     => ( $transcripts_records != false ),
             'records'           => $transcripts_records,

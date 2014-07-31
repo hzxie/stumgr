@@ -145,9 +145,15 @@ class Lib_scores {
         return $transcripts_records;
     }
 
-    public function get_transcripts_records_by_grade($grade, $course_id)
+    public function get_transcripts_records_by_grade($school_year, $grade, $course_id)
     {
-        $transcripts_records = $this->__CI->Scores_model->get_transcripts_records_by_grade($grade, $course_id);
+        $transcripts_records = null;
+        if ( $course_id === 'all' ) {
+            $transcripts_records = $this->get_transcripts_ranking_by_grade($school_year, $grade);
+        } else {
+            $transcripts_records = $this->__CI->Scores_model->get_transcripts_records_by_grade_and_course_id($grade, $course_id);            
+        }
+        
         if ( $transcripts_records ) {
             foreach ( $transcripts_records as &$record ) {
                 if ( $record['is_hierarchy'] ) {
@@ -156,6 +162,82 @@ class Lib_scores {
             }
         }
         return $transcripts_records;
+    }
+
+    public function get_transcripts_ranking_by_student($school_year, $student_id)
+    {
+        $student = $this->__CI->Students_model->select($student_id);
+        $grade   = $student['student_id'];
+        $scores  = $this->get_transcripts_ranking($school_year, $grade);
+
+        return $scores['student_id'];
+    }
+
+    public function get_transcripts_ranking_by_grade($school_year, $grade)
+    {
+        $scores = $this->get_transcripts_ranking($school_year, $grade);
+        return $this->get_array($scores);
+    }
+
+
+    private function get_transcripts_ranking($school_year, $grade)
+    {
+        $students = $this->get_map($this->__CI->Students_model->get_students_profile_list_by_grade($grade), 'student_id');
+        $courses  = $this->get_map($this->__CI->Education_plans_model->get_education_plan($school_year, $grade), 'course_id');
+        $scores   = $this->__CI->Scores_model->get_transcripts_records_by_grade($school_year, $grade);
+
+        foreach ( $scores as $score ) {
+            $student_id = $score['student_id'];
+            $course_id  = $score['course_id'];
+            $score      = $this->get_score($score['final_score']);
+            if ( array_key_exists($course_id, $courses) ) {
+                if ( !array_key_exists('total_score', $students[$student_id]) ) {
+                    $students[$student_id]['total_score'] = 0;
+                    $students[$student_id]['total_credits'] = 0;
+                }
+                $credits = $courses[$course_id]['credits'];
+                $students[$student_id]['total_score'] += $score * $credits;
+                $students[$student_id]['total_credits'] += $credits;
+            }
+        }
+
+        foreach ( $students as &$student ) {
+            $student['is_hierarchy'] = false;
+            if ( !array_key_exists('total_credits', $student) || $student['total_credits'] == 0 ) {
+                $student['final_score'] = 0;
+                continue;
+            }
+            $student['final_score']  = round($student['total_score'] / $student['total_credits'], 4);
+        }
+        foreach ( $students as $key => $row ) {
+            $sorting[$key] = $row['final_score'];
+        }
+        array_multisort($sorting, SORT_DESC, $students);
+        $ranking = 0;
+        foreach ( $students as &$student ) {
+            $student['ranking'] = ++ $ranking;
+        }
+        
+        return $students;
+    }
+
+    private function get_map(&$array, $key_name)
+    {
+        $map = array();
+        foreach ( $array as $item ) {
+            $key       = $item[$key_name];
+            $map[$key] = $item;
+        }
+        return $map;
+    }
+
+    private function get_array($map)
+    {
+        $array = array();
+        foreach ( $map as $item ) {
+            array_push($array, $item);
+        }
+        return $array;
     }
 
     /**
@@ -260,9 +342,9 @@ class Lib_scores {
             } else if ( $score == 'Z12' ) {
                 return 85;
             } else if ( $score == 'Z13' ) {
-                return 70;
+                return 75;
             } else if ( $score == 'Z14' ) {
-                return 60;
+                return 65;
             } else {
                 return 0;
             }
@@ -275,9 +357,9 @@ class Lib_scores {
             return '优';
         } else if ( $score == 85 ) {
             return '良';
-        } else if ( $score == 70 ) {
+        } else if ( $score == 75 ) {
             return '中';
-        } else if ( $score == 60 ) {
+        } else if ( $score == 65 ) {
             return '及格';
         } else if ( $score == 0 ) {
             return '不及格';
