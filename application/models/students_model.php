@@ -103,8 +103,7 @@ class Students_model extends CI_Model {
 	 */
 	public function get_students_list_by_class($grade, $class)
 	{
-		$this->db->select('student_id, student_name');
-
+		$this->db->select('student_id, student_name, grade, class');
 		$this->db->where('grade', $grade);
 		$this->db->where('class', $class);
 		
@@ -127,8 +126,7 @@ class Students_model extends CI_Model {
 	 */
 	public function get_students_list_by_grade($grade)
 	{
-		$this->db->select('student_id, student_name');
-
+		$this->db->select('student_id, student_name, grade, class');
 		$this->db->where('grade', $grade);
 		
 		$query = $this->db->get($this->db->dbprefix('students'));
@@ -141,7 +139,7 @@ class Students_model extends CI_Model {
 
 	public function get_all_students_list()
 	{
-		$this->db->select('student_id, student_name');
+		$this->db->select('student_id, student_name, grade, class');
 
 		$query = $this->db->get($this->db->dbprefix('students'));
 		if ( $query->num_rows() > 0 ) {

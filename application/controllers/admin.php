@@ -559,7 +559,21 @@ class Admin extends CI_Controller {
      */
     public function get_data_for_gpa()
     {
-        
+        $data = array( 
+            'available_grades'  => $this->lib_scores->get_available_grades(),
+        );
+        return $data;
+    }
+
+    public function get_gpa_records($grade)
+    {
+        $gpa_records            = $this->lib_scores->get_gpa_by_grade($grade);
+        $result = array(
+            'is_successful'     => ( $gpa_records != false ),
+            'records'           => $gpa_records,
+        );
+
+        echo json_encode($result);
     }
 
     /**

@@ -179,12 +179,11 @@ class Lib_scores {
         return $this->get_array($scores);
     }
 
-
-    private function get_transcripts_ranking($school_year, $grade)
+    public function get_transcripts_ranking($school_year, $grade)
     {
-        $students = $this->get_map($this->__CI->Students_model->get_students_profile_list_by_grade($grade), 'student_id');
+        $students = $this->get_map($this->__CI->Students_model->get_students_list_by_grade($grade), 'student_id');
         $courses  = $this->get_map($this->__CI->Education_plans_model->get_education_plan($school_year, $grade), 'course_id');
-        $scores   = $this->__CI->Scores_model->get_transcripts_records_by_grade($school_year, $grade);
+        $scores   = $this->__CI->Scores_model->get_transcripts_records_by_grade_and_school_year($school_year, $grade);
 
         foreach ( $scores as $score ) {
             $student_id = $score['student_id'];
@@ -221,9 +220,77 @@ class Lib_scores {
         return $students;
     }
 
+    public function get_gpa_by_student($student_id)
+    {
+        $student = $this->__CI->Students_model->select($student_id);
+        $grade   = $student['student_id'];
+        $gpa     = $this->get_gpa($grade);
+
+        return $gpa['student_id'];
+    }
+
+    public function get_gpa_by_grade($grade)
+    {
+        $gpa = $this->get_gpa($grade);
+        return $this->get_array($gpa);
+    }
+
+    private function get_gpa($grade)
+    {
+        $students = $this->get_map($this->__CI->Students_model->get_students_profile_list_by_grade($grade), 'student_id');
+        $courses  = $this->get_map($this->__CI->Education_plans_model->get_all_education_plans(), 'course_id');
+        $scores   = $this->__CI->Scores_model->get_transcripts_records_by_grade($grade);
+
+        foreach ( $scores as $score ) {
+            $student_id     = $score['student_id'];
+            $course_id      = $score['course_id'];
+            $grade_point    = $this->get_grade_point($score['final_score'], $score['is_hierarchy'], $score['is_passed']);
+            if ( array_key_exists($course_id, $courses) ) {
+                if ( !array_key_exists('courses', $students[$student_id]) ) {
+                    $students[$student_id]['courses'] = array();
+                }
+                if ( array_key_exists($course_id, $students[$student_id]['courses']) ) {
+                    $current_grade_point = $students[$student_id]['courses'][$course_id];
+                    if ( $grade_point <= $current_grade_point ) {
+                        continue;
+                    }
+                }
+                $students[$student_id]['courses'][$course_id] = $grade_point;
+            }
+        }
+        foreach ( $students as &$student ) {
+            $student['total_grade_points'] = 0;
+            $student['total_credits'] = 0;
+            foreach ( $student['courses'] as $course_id => $grade_point ) {
+                $credits = $courses[$course_id]['credits'];
+                $student['total_grade_points'] += $grade_point * $credits;
+                $student['total_credits'] += $credits;
+            }
+            if ( $student['total_credits'] == 0 ) {
+                $student['gpa'] = 0;
+                continue;
+            }
+            $student['gpa'] = round($student['total_grade_points'] / $student['total_credits'], 4);
+        }
+        foreach ( $students as $key => $row ) {
+            $sorting[$key] = $row['gpa'];
+        }
+        array_multisort($sorting, SORT_DESC, $students);
+        $ranking = 0;
+        foreach ( $students as &$student ) {
+            $student['ranking'] = ++ $ranking;
+        }
+
+        return $students;
+    }
+
     private function get_map(&$array, $key_name)
     {
         $map = array();
+
+        if ( $array == null ) {
+            return;
+        }
         foreach ( $array as $item ) {
             $key       = $item[$key_name];
             $map[$key] = $item;
@@ -234,6 +301,10 @@ class Lib_scores {
     private function get_array($map)
     {
         $array = array();
+
+        if ( $map == null ) {
+            return;
+        }
         foreach ( $map as $item ) {
             array_push($array, $item);
         }

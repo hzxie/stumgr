@@ -47,7 +47,6 @@
             url: "<?php echo base_url().'admin/get_available_courses/'; ?>" + school_year + '/' + grade,
             dataType: 'JSON',
             success: function(result) {
-                console.log(result);
                 $('#available-courses').empty();
                 $('#available-courses').append('<option value="all">(综合排名)</option>');
                 if ( result['is_successful'] ) {
