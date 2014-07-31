@@ -175,8 +175,7 @@ class Lib_scores {
 
     public function get_transcripts_ranking_by_grade($school_year, $grade)
     {
-        $scores = $this->get_transcripts_ranking($school_year, $grade);
-        return $this->get_array($scores);
+        return $this->get_transcripts_ranking($school_year, $grade);
     }
 
     public function get_transcripts_ranking($school_year, $grade)
@@ -223,16 +222,22 @@ class Lib_scores {
     public function get_gpa_by_student($student_id)
     {
         $student = $this->__CI->Students_model->select($student_id);
-        $grade   = $student['student_id'];
+        $grade   = $student['grade'];
         $gpa     = $this->get_gpa($grade);
 
-        return $gpa['student_id'];
+        if ( $gpa != null ) {
+            foreach ( $gpa as $record ) {
+                if ( $record['student_id'] === $student_id ) {
+                    return $record;
+                }
+            }
+        }
+        return null;
     }
 
     public function get_gpa_by_grade($grade)
     {
-        $gpa = $this->get_gpa($grade);
-        return $this->get_array($gpa);
+        return $this->get_gpa($grade);
     }
 
     private function get_gpa($grade)
@@ -280,7 +285,6 @@ class Lib_scores {
         foreach ( $students as &$student ) {
             $student['ranking'] = ++ $ranking;
         }
-
         return $students;
     }
 

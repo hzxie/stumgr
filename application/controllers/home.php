@@ -310,10 +310,10 @@ class Home extends CI_Controller {
     {
         $available_years       = $this->lib_scores->get_available_years($this->profile['student_id']);
         $current_school_year   = $this->lib_scores->get_current_school_year();
-        $data            = array(
-                'available_years'       => ($available_years ? $available_years : 
-                                                               array(array('school_year' => $current_school_year)))
-            );
+        $data                  = array(
+            'available_years'  => ($available_years ? $available_years : 
+                                                      array(array('school_year' => $current_school_year)))
+        );
         return $data;
     }
 
@@ -332,7 +332,7 @@ class Home extends CI_Controller {
 
         $result = array(
                 'is_successful' => ($transcripts_records != false),
-                'records'       => $transcripts_records
+                'records'       => $transcripts_records,
             );
         echo json_encode($result);
     }
@@ -343,7 +343,12 @@ class Home extends CI_Controller {
      */
     public function get_data_for_gpa()
     {
-
+        $student_id     = $this->profile['student_id'];
+        $gpa            = $this->lib_scores->get_gpa_by_student($student_id);
+        $data           = array(
+            'gpa'       => $gpa,
+        );
+        return $data;
     }
 
     /**
@@ -423,12 +428,12 @@ class Home extends CI_Controller {
         $current_school_year    = $this->lib_rewards->get_current_school_year();
         $reward_levels          = $this->lib_rewards->get_reward_levels();
 
-        $data            = array(
-                'current_school_year'   => $current_school_year,
-                'reward_levels'         => $reward_levels,
-                'available_years'       => ($available_years ? $available_years : 
-                                                               array(array('school_year' => $current_school_year)))
-            );
+        $data = array(
+            'current_school_year'   => $current_school_year,
+            'reward_levels'         => $reward_levels,
+            'available_years'       => ($available_years ? $available_years : 
+                                                           array(array('school_year' => $current_school_year)))
+        );
         return $data;
     }
 
