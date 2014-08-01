@@ -626,7 +626,7 @@ class Admin extends CI_Controller {
 
     public function get_assessment_records($school_year, $grade)
     {
-        $assessment_records = $this->lib_evaluation->get_assessment_records($school_year, $grade);
+        $assessment_records = $this->lib_evaluation->get_assessment_records_by_grade($school_year, $grade);
         $result = array(
             'is_successful' => ($assessment_records != false),
             'records'       => $assessment_records
@@ -649,7 +649,23 @@ class Admin extends CI_Controller {
      */
     public function get_data_for_result()
     {
-        
+        $data                   = array(
+            'available_years'   => $this->lib_evaluation->get_all_available_years_for_result(),
+            'available_grades'  => $this->lib_evaluation->get_available_grades(),
+            'options'           => $this->options, 
+        );
+        return $data;
+    }
+
+    public function get_evaluation_records($school_year, $grade)
+    {
+        $evaluation_records     = $this->lib_evaluation->get_result_by_grade($school_year, $grade, $this->options);
+
+        $result = array(
+            'is_successful'     => $evaluation_records != false,
+            'records'           => $evaluation_records,
+        );
+        echo json_encode($result);
     }
 }
 

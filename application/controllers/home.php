@@ -458,9 +458,9 @@ class Home extends CI_Controller {
         $reward_records         = $this->lib_rewards->get_reward_records_by_students($school_year, $student_id);
 
         $result = array(
-                'is_successful' => ($reward_records != false),
-                'records'       => $reward_records
-            );
+            'is_successful' => $reward_records != false,
+            'records'       => $reward_records
+        );
         echo json_encode($result);
     }
 
@@ -486,11 +486,26 @@ class Home extends CI_Controller {
      */
     public function get_data_for_result()
     {
-        $data = array(
-            'available_years'   => $this->lib_evaluation->get_available_years_for_assessment(),
+        $student_id             = $this->profile['student_id'];
+        $data                   = array(
+            'available_years'   => $this->lib_evaluation->get_available_years_for_result($student_id),
             'options'           => $this->options, 
         );
         return $data;
+    }
+
+    public function get_evaluation_records($school_year)
+    {
+        $student_id             = $this->profile['student_id'];
+        $assessment_records     = $this->lib_evaluation->get_assessment_records_by_student($school_year, $student_id);
+        $evaluation_records     = $this->lib_evaluation->get_result_by_student($school_year, $student_id, $this->options);
+
+        $result = array(
+            'is_successful'         => $assessment_records != false && $evaluation_records != false,
+            'assessment_records'    => $assessment_records,
+            'evaluation_records'    => $evaluation_records,
+        );
+        echo json_encode($result);
     }
 }
 

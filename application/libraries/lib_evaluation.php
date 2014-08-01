@@ -19,6 +19,8 @@ class Lib_evaluation {
         $this->__CI->load->model('Students_model');
         $this->__CI->load->model('Assessment_model');
         $this->__CI->load->model('Options_model');
+
+        $this->__CI->load->library('lib_scores');
     }
 
     /**
@@ -63,7 +65,7 @@ class Lib_evaluation {
      */
     public function get_available_years_for_assessment()
     {
-        $available_years        = $this->__CI->Assessment_model->get_available_years();
+        $available_years        = $this->__CI->Assessment_model->get_all_available_years();
         $current_size           = count($available_years);
         $current_school_year    = $this->get_current_school_year();
 
@@ -89,9 +91,14 @@ class Lib_evaluation {
         return array_reverse($available_grades);
     }
 
-    public function get_assessment_records($school_year, $grade)
+    public function get_assessment_records_by_student($school_year, $student_id)
     {
-        return $this->__CI->Assessment_model->get_assessment_records($school_year, $grade);
+        return $this->__CI->Assessment_model->get_assessment_records_by_student($school_year, $student_id);
+    }
+
+    public function get_assessment_records_by_grade($school_year, $grade)
+    {
+        return $this->__CI->Assessment_model->get_assessment_records_by_grade($school_year, $grade);
     }
 
     /**
@@ -247,6 +254,123 @@ class Lib_evaluation {
         }
 
         return $votes;
+    }
+
+    public function get_available_years_for_result($student_id)
+    {
+        $available_years        = $this->__CI->Assessment_model->get_available_years($student_id);
+        $current_size           = count($available_years);
+        $current_school_year    = $this->get_current_school_year();
+        
+        if ( !$this->__CI->lib_utils->in_array($available_years, 'school_year', $current_school_year) ) {
+            $available_years[$current_size]['school_year'] = $current_school_year;
+        }
+        return array_reverse($available_years);
+    }
+
+    public function get_all_available_years_for_result()
+    {
+        $available_years        = $this->__CI->Assessment_model->get_all_available_years();
+        $current_size           = count($available_years);
+        $current_school_year    = $this->get_current_school_year();
+
+        if ( !$this->__CI->lib_utils->in_array($available_years, 'school_year', $current_school_year) ) {
+            $available_years[$current_size]['school_year'] = $current_school_year;
+        }
+        return array_reverse($available_years);
+    }
+
+    public function get_result_by_student($school_year, $student_id, &$options)
+    {
+        $student = $this->__CI->Students_model->select($student_id);
+        $grade   = $student['grade'];
+        $result  = $this->get_result($school_year, $grade, $options);
+
+        if ( $result != null ) {
+            foreach ( $result as $record ) {
+                if ( $record['student_id'] === $student_id ) {
+                    return $record;
+                }
+            }
+        }
+        return null;
+    }
+
+    public function get_result_by_grade($school_year, $grade, &$options)
+    {
+        return $this->get_result($school_year, $grade, $options);
+    }
+
+    public function get_result($school_year, $grade, &$options)
+    {
+        $students       = $this->get_map($this->__CI->Students_model->get_students_list_by_grade($grade), 'student_id');
+        $intelligence   = $this->get_map($this->__CI->lib_scores->get_transcripts_ranking($school_year, $grade), 'student_id');
+        $assessment     = $this->get_map($this->get_assessment_records_by_grade($school_year, $grade), 'student_id');
+        $extra          = null;
+
+        if ( $students == null || $intelligence == null || $assessment == null ) {
+            return null;
+        }
+        foreach ( $students as &$student ) {
+            $student_id                 = $student['student_id'];
+            $student['moral']           = $this->get_assessment_score($assessment[$student_id]['moral_excellent'], $assessment[$student_id]['moral_good'], 
+                                                                      $assessment[$student_id]['moral_medium'], $assessment[$student_id]['moral_poor'], $options);
+            $student['intelligence']    = $intelligence[$student_id]['final_score'];
+            $student['strength']        = $this->get_assessment_score($assessment[$student_id]['strength_excellent'], $assessment[$student_id]['strength_good'], 
+                                                                      $assessment[$student_id]['strength_medium'], $assessment[$student_id]['strength_poor'], $options);
+            $student['ability']         = $this->get_assessment_score($assessment[$student_id]['ability_excellent'], $assessment[$student_id]['ability_good'], 
+                                                                      $assessment[$student_id]['ability_medium'], $assessment[$student_id]['ability_poor'], $options);
+            $student['extra']           = 0;
+            $student['total_score']     = $student['moral'] * $options['moral_percents'] + $student['intelligence'] * $options['intelligence_percents'] + 
+                                          $student['strength'] * $options['strength_percents'] + $student['ability'] * $options['ability_percents'] + 
+                                          $student['extra'];
+        }
+        foreach ( $students as $key => $row ) {
+            $sorting[$key] = $row['total_score'];
+        }
+        array_multisort($sorting, SORT_DESC, $students);
+        $ranking = 0;
+        foreach ( $students as &$student ) {
+            $student_id                      = $student['student_id'];
+            $student['intelligence_ranking'] = $intelligence[$student_id]['ranking'];
+            $student['ranking']              = ++ $ranking;
+        }
+
+        return $students;
+    }
+
+    private function get_assessment_score($excellent, $good, $medium, $poor, &$options)
+    {
+        return round(($excellent * $options['excellent_score'] + $good * $options['good_score'] +
+                        $medium * $options['medium_score'] + $poor * $options['poor_score']) /
+                       ($excellent + $good + $medium + $poor), 4);
+    }
+
+    private function get_map(&$array, $key_name)
+    {
+        $map = array();
+
+        if ( $array == null ) {
+            return;
+        }
+        foreach ( $array as $item ) {
+            $key       = $item[$key_name];
+            $map[$key] = $item;
+        }
+        return $map;
+    }
+
+    private function get_array($map)
+    {
+        $array = array();
+
+        if ( $map == null ) {
+            return;
+        }
+        foreach ( $map as $item ) {
+            array_push($array, $item);
+        }
+        return $array;
     }
 }
 

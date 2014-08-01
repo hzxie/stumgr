@@ -164,15 +164,6 @@ class Lib_scores {
         return $transcripts_records;
     }
 
-    public function get_transcripts_ranking_by_student($school_year, $student_id)
-    {
-        $student = $this->__CI->Students_model->select($student_id);
-        $grade   = $student['student_id'];
-        $scores  = $this->get_transcripts_ranking($school_year, $grade);
-
-        return $scores['student_id'];
-    }
-
     public function get_transcripts_ranking_by_grade($school_year, $grade)
     {
         return $this->get_transcripts_ranking($school_year, $grade);
@@ -184,6 +175,9 @@ class Lib_scores {
         $courses  = $this->get_map($this->__CI->Education_plans_model->get_education_plan($school_year, $grade), 'course_id');
         $scores   = $this->__CI->Scores_model->get_transcripts_records_by_grade_and_school_year($school_year, $grade);
 
+        if ( $scores == null ) {
+            return null;
+        }
         foreach ( $scores as $score ) {
             $student_id = $score['student_id'];
             $course_id  = $score['course_id'];
@@ -246,6 +240,9 @@ class Lib_scores {
         $courses  = $this->get_map($this->__CI->Education_plans_model->get_all_education_plans(), 'course_id');
         $scores   = $this->__CI->Scores_model->get_transcripts_records_by_grade($grade);
 
+        if ( $scores == null ) {
+            return null;
+        }
         foreach ( $scores as $score ) {
             $student_id     = $score['student_id'];
             $course_id      = $score['course_id'];

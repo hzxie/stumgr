@@ -54,11 +54,26 @@ class Assessment_model extends CI_Model {
         }
     }
 
+    public function get_available_years($student_id)
+    {
+        $this->db->distinct();
+        $this->db->select('school_year');
+        $this->db->where('student_id', $student_id);
+        $this->db->order_by('school_year', 'asc');
+
+        $query = $this->db->get($this->db->dbprefix('assessment'));
+        if ( $query->num_rows() > 0 ) {
+            return $query->result_array();
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Get available years to select from existing data.
      * @return an array contains all available years
      */
-    public function get_available_years()
+    public function get_all_available_years()
     {
         $this->db->distinct();
         $this->db->select('school_year');
@@ -71,7 +86,20 @@ class Assessment_model extends CI_Model {
         }
     }
 
-    public function get_assessment_records($school_year, $grade)
+    public function get_assessment_records_by_student($school_year, $student_id)
+    {
+        $this->db->where('school_year', $school_year);
+        $this->db->where('student_id', $student_id);
+        $query = $this->db->get($this->db->dbprefix('assessment'));
+
+        if ( $query->num_rows() > 0 ) {
+            return $query->row_array();
+        } else {
+            return false;
+        }
+    }
+
+    public function get_assessment_records_by_grade($school_year, $grade)
     {
         $assessment_table   = $this->db->dbprefix('assessment');
         $students_table     = $this->db->dbprefix('students');
