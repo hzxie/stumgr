@@ -2,10 +2,10 @@
 
 Version: 2.0.0 (Under Development)
 
-[![Build Status](https://travis-ci.org/zjhzxhz/stumgr.png?branch=master)](https://travis-ci.org/zjhzxhz/stumgr)
+[![Build Status](https://travis-ci.org/hzxie/stumgr.png?branch=master)](https://travis-ci.org/hzxie/stumgr)
 
 [**Official Website**](http://rjxy.hfut.edu.cn/stumgr) | 
-[**Tech Support**](http://www.zjhzxhz.com) |
+[**Tech Support**](http://www.haozhexie.com) |
 [**Change Log**](http://rjxy.hfut.edu.cn/stumgr/support/about)
 
 ---
