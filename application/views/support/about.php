@@ -117,7 +117,7 @@
                         </ul>
                     </div> <!-- #version-1.0 -->
                     <p>
-                        <strong>Follow us on GitHub: </strong>
+                        <strong>Follow us on GitHub: </strong><br>
                         <a href="https://github.com/hzxie/stumgr">
                             <img src="https://img.shields.io/github/stars/hzxie/stumgr.svg?style=social&label=Stars" alt="GitHub@stumgr">
                         </a>
