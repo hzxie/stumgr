@@ -57,7 +57,7 @@
                     </div>
                     <p><strong>本软件由如下志愿者提供技术支持:</strong></p>
                     <ul class="supporter">
-                        <li>谢浩哲 &lt;<a href="mailto:zjhzxhz@gmail.com">zjhzxhz@gmail.com</a>&gt;</li>
+                        <li>谢浩哲 &lt;<a href="mailto:cshzxie@gmail.com">cshzxie@gmail.com</a>&gt;</li>
                     </ul>
                     <p><strong>特别致谢:</strong></p>
                     <ul class="supporter">
@@ -116,7 +116,12 @@
                             <li>首次在软件学院使用该软件</li>
                         </ul>
                     </div> <!-- #version-1.0 -->
-                    <p><strong>Follow us on GitHub: </strong><a href="https://github.com/zjhzxhz/stumgr">GitHub@stumgr</a></p>
+                    <p>
+                        <strong>Follow us on GitHub: </strong>
+                        <a href="https://github.com/hzxie/stumgr">
+                            <img src="https://img.shields.io/github/stars/hzxie/stumgr.svg?style=social&label=Stars" alt="GitHub@stumgr">
+                        </a>
+                    </p>
                 </section> <!-- #changelog -->
             </div>
         </div>
