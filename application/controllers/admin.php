@@ -120,7 +120,7 @@ class Admin extends CI_Controller {
         $session = $this->session->all_userdata();
         $welcome = array(
             'display_name'          => $this->profile['display_name'],
-            'ip_address'            => $session['ip_address'],
+            'ip_address'            => $this->input->ip_address(),
             'last_time_signin'      => $session['last_time_signin'],
             'allow_auto_sign_in'    => $session['allow_auto_sign_in']
         );

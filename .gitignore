@@ -4,3 +4,4 @@ vendor/*
 */cache/*
 */cache/!index.html
 */uploads/*
+.DS_Store

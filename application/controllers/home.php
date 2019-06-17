@@ -123,7 +123,7 @@ class Home extends CI_Controller {
         $session = $this->session->all_userdata();
         $welcome = array(
                 'display_name'          => $this->profile['display_name'],
-                'ip_address'            => $session['ip_address'],
+                'ip_address'            => $this->input->ip_address(),
                 'last_time_signin'      => $session['last_time_signin'],
                 'allow_auto_sign_in'    => $session['allow_auto_sign_in']
             );
@@ -391,9 +391,9 @@ class Home extends CI_Controller {
         $is_peer_assessment_active  = $this->get_option('is_peer_assessment_active');
         $is_participated            = $this->lib_evaluation->is_participated($school_year, $this->profile['student_id']);
         $result                     = array(
-            'is_successful'                 => $this->boolval(($is_peer_assessment_active && !$is_participated)),
-            'is_peer_assessment_active'     => $this->boolval($is_peer_assessment_active),
-            'is_participated'               => $this->boolval($is_participated),
+            'is_successful'                 => boolval(($is_peer_assessment_active && !$is_participated)),
+            'is_peer_assessment_active'     => boolval($is_peer_assessment_active),
+            'is_participated'               => boolval($is_participated),
             'is_post_successful'            => false
         );
 
@@ -416,14 +416,6 @@ class Home extends CI_Controller {
         }
 
         echo json_encode($result);
-    }
-
-    private function boolval($boolval)
-    {
-        if ( !function_exists(boolval) ) {
-            return $boolval === '1';
-        }
-        return boolval($boolval);
     }
 
     /**

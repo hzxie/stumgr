@@ -94,7 +94,7 @@ class Lib_routine {
      */
     private function get_available_years($student_id, &$available_years)
     {
-        $current_size        = count($available_years);
+        $current_size        = is_array($available_years) ? count($available_years) : 0;
         $current_school_year = $this->get_current_school_year();
         $year_attend_school  = substr($student_id, 0, 4);
         $start_index = 0;

@@ -24,9 +24,9 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 
 	// --------------------------------------------------------------------
 
-	public function __construct()
+	public function __construct($name = null, array $data = array(), $dataName = '')
 	{
-		parent::__construct();
+		parent::__construct($name, $data, $dataName);
 		$this->ci_instance = new stdClass();
 	}
 
@@ -135,22 +135,27 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	{
 		$name = strtolower($name);
 
-		if (isset($this->global_map[$name])) {
+		if (isset($this->global_map[$name]))
+		{
 			$class_name = ucfirst($name);
 			$global_name = $this->global_map[$name];
-		} elseif (in_array($name, $this->global_map)) {
+		}
+		elseif (in_array($name, $this->global_map))
+		{
 			$class_name = ucfirst(array_search($name, $this->global_map));
 			$global_name = $name;
-		} else {
+		}
+		else
+		{
 			throw new Exception('Not a valid core class.');
 		}
 
-		if ( ! class_exists('CI_'.$class_name)) {
+		if ( ! class_exists('CI_'.$class_name))
+		{
 			require_once SYSTEM_PATH.'core/'.$class_name.'.php';
 		}
 
 		$GLOBALS[strtoupper($global_name)] = 'CI_'.$class_name;
-		// var_dump($GLOBALS);
 		return $GLOBALS[strtoupper($global_name)];
 	}
 
@@ -269,14 +274,14 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 	 * @param	string	Path from base directory
 	 * @return	bool	TRUE on success, otherwise FALSE
 	 */
-	public function ci_vfs_clone($path)
+	public function ci_vfs_clone($path, $dest='')
 	{
 		// Check for array
 		if (is_array($path))
 		{
 			foreach ($path as $file)
 			{
-				$this->ci_vfs_clone($file);
+				$this->ci_vfs_clone($file, $dest);
 			}
 			return;
 		}
@@ -289,7 +294,12 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 			return FALSE;
 		}
 
-		$this->ci_vfs_create(basename($path), $content, NULL, dirname($path));
+		if (empty($dest))
+		{
+			$dest = dirname($path);
+		}
+
+		$this->ci_vfs_create(basename($path), $content, NULL, $dest);
 		return TRUE;
 	}
 
@@ -352,7 +362,7 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 
 	public function lang($name)
 	{
-		require(SYSTEM_PATH.'language/zh-CN/'.$name.'_lang.php');
+		require(SYSTEM_PATH.'language/english/'.$name.'_lang.php');
 		return $lang;
 	}
 
@@ -367,10 +377,8 @@ class CI_TestCase extends PHPUnit_Framework_TestCase {
 		{
 			return call_user_func_array($this->{$method},$args);
 		}
-		else
-		{
-			return parent::__call($method, $args);
-		}
+
+		return parent::__call($method, $args);
 	}
 
 }

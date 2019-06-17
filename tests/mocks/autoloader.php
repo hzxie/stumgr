@@ -1,6 +1,6 @@
 <?php
 
-// This autoloader provide convinient way to working with mock object
+// This autoloader provide convenient way to working with mock object
 // make the test looks natural. This autoloader support cascade file loading as well
 // within mocks directory.
 //
@@ -13,78 +13,106 @@ function autoload($class)
 {
 	$dir = realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR;
 
-    echo '$class='.$class."\n";
-
 	$ci_core = array(
-		'Benchmark', 'Config', 'Controller',
-		'Exceptions', 'Hooks', 'Input',
-		'Lang', 'Loader', 'Log', 'Model',
-		'Output', 'Router', 'Security',
-		'URI', 'Utf8'
+		'Benchmark',
+		'Config',
+		'Controller',
+		'Exceptions',
+		'Hooks',
+		'Input',
+		'Lang',
+		'Loader',
+		'Log',
+		'Model',
+		'Output',
+		'Router',
+		'Security',
+		'URI',
+		'Utf8'
 	);
 
 	$ci_libraries = array(
-		'Calendar', 'Cart', 'Driver_Library',
-		'Email', 'Encrypt', 'Form_validation',
-		'Ftp', 'Image_lib', 'Javascript',
-		'Migration', 'Pagination', 'Parser',
-		'Profiler', 'Table', 'Trackback',
-	   	'Typography', 'Unit_test', 'Upload',
-	   	'User_agent', 'Xmlrpc', 'Zip'
+		'Calendar',
+		'Cart',
+		'Driver_Library',
+		'Email',
+		'Encrypt',
+		'Encryption',
+		'Form_validation',
+		'Ftp',
+		'Image_lib',
+		'Javascript',
+		'Migration',
+		'Pagination',
+		'Parser',
+		'Profiler',
+		'Table',
+		'Trackback',
+	   	'Typography',
+		'Unit_test',
+		'Upload',
+	   	'User_agent',
+		'Xmlrpc',
+		'Zip'
 	);
 
-	$ci_drivers = array(
-		'Session'
-	);
+	$ci_drivers = array('Session', 'Cache');
 
-	if (strpos($class, 'Mock_') === 0) {
+	if (strpos($class, 'Mock_') === 0)
+	{
 		$class = strtolower(str_replace(array('Mock_', '_'), array('', DIRECTORY_SEPARATOR), $class));
-	} elseif (strpos($class, 'CI_') === 0) {
+	}
+	elseif (strpos($class, 'CI_') === 0)
+	{
 		$subclass = substr($class, 3);
 
-		if (in_array($subclass, $ci_core)) {
+		if (in_array($subclass, $ci_core))
+		{
 			$dir = SYSTEM_PATH.'core'.DIRECTORY_SEPARATOR;
 			$class = $subclass;
-		} elseif (in_array($subclass, $ci_libraries)) {
+		}
+		elseif (in_array($subclass, $ci_libraries))
+		{
 			$dir = SYSTEM_PATH.'libraries'.DIRECTORY_SEPARATOR;
 			$class = ($subclass === 'Driver_Library') ? 'Driver' : $subclass;
-		} elseif (in_array($subclass, $ci_drivers)) {
+		}
+		elseif (in_array($subclass, $ci_drivers))
+		{
 			$dir = SYSTEM_PATH.'libraries'.DIRECTORY_SEPARATOR.$subclass.DIRECTORY_SEPARATOR;
 			$class = $subclass;
-		} elseif (in_array(($parent = strtok($subclass, '_')), $ci_drivers)) {
+		}
+		elseif (in_array(($parent = strtok($subclass, '_')), $ci_drivers)) {
 			$dir = SYSTEM_PATH.'libraries'.DIRECTORY_SEPARATOR.$parent.DIRECTORY_SEPARATOR.'drivers'.DIRECTORY_SEPARATOR;
 			$class = $subclass;
-		} elseif (preg_match('/^CI_DB_(.+)_(.+)_(driver|forge|result|utility)$/', $class, $m) && count($m) === 4) {
+		}
+		elseif (preg_match('/^CI_DB_(.+)_(.+)_(driver|forge|result|utility)$/', $class, $m) && count($m) === 4)
+		{
 			$driver_path = SYSTEM_PATH.'database'.DIRECTORY_SEPARATOR.'drivers'.DIRECTORY_SEPARATOR;
 			$dir = $driver_path.$m[1].DIRECTORY_SEPARATOR.'subdrivers'.DIRECTORY_SEPARATOR;
 			$file = $dir.$m[1].'_'.$m[2].'_'.$m[3].'.php';
-		} elseif (preg_match('/^CI_DB_(.+)_(driver|forge|result|utility)$/', $class, $m) && count($m) === 3) {
+		}
+		elseif (preg_match('/^CI_DB_(.+)_(driver|forge|result|utility)$/', $class, $m) && count($m) === 3)
+		{
 			$driver_path = SYSTEM_PATH.'database'.DIRECTORY_SEPARATOR.'drivers'.DIRECTORY_SEPARATOR;
 			$dir = $driver_path.$m[1].DIRECTORY_SEPARATOR;
 			$file = $dir.$m[1].'_'.$m[2].'.php';
-		} elseif (strpos($class, 'CI_DB') === 0) {
+		}
+		elseif (strpos($class, 'CI_DB') === 0)
+		{
 			$dir = SYSTEM_PATH.'database'.DIRECTORY_SEPARATOR;
 			$file = $dir.str_replace(array('CI_DB','active_record'), array('DB', 'active_rec'), $subclass).'.php';
-		} else {
+		}
+		else
+		{
 			$class = strtolower($class);
 		}
 	}
 
 	$file = isset($file) ? $file : $dir.$class.'.php';
 
-	if ( ! file_exists($file)) {
-		$trace = debug_backtrace();
-
-		if ($trace[2]['function'] === 'class_exists' OR $trace[2]['function'] === 'file_exists') {
-			// If the autoload call came from `class_exists` or `file_exists`,
-			// we skipped and return FALSE
-			return FALSE;
-		} elseif (($autoloader = spl_autoload_functions()) && end($autoloader) !== __FUNCTION__) {
-			// If there was other custom autoloader, passed away
-			return FALSE;
-		}
-
-		throw new InvalidArgumentException("Unable to load {$class}.");
+	if ( ! file_exists($file))
+	{
+		return FALSE;
 	}
 
 	include_once($file);
