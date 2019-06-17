@@ -42,7 +42,7 @@ $config['base_url'] = '';
 | Base Site URL instead.
 |
 */
-$config['cdn_url'] = 'https://cdn.haozhexie.com/stumgr/';
+$config['cdn_url'] = 'https://cdn.haozhexie.com/stumgr';
 
 /*
 |--------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-<link href="<?php echo base_url('assets/css/fineuploader.min.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('/css/fineuploader.min.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <div id="score-settings-header" class="page-header">
     <h1>参数设置</h1>
@@ -18,7 +18,7 @@
                 <form action="<?php echo base_url('admin/import_scores'); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                     <table class="table no-border">
                         <tr class="no-border">
-                            <td><small><a href="<?php echo base_url('assets/tpl/template-scores.xlsx'); ?>">查看文件模板</a></small></td>
+                            <td><small><a href="<?php echo base_url('/tpl/template-scores.xlsx'); ?>">查看文件模板</a></small></td>
                         </tr>
                         <tr class="no-border">
                             <td><div id="jquery-wrapped-fine-uploader"></div></td>
@@ -120,7 +120,7 @@
 </script>
 
 <!-- JavaScript for scores tab -->
-<script type="text/javascript" src="<?php echo base_url('assets/js/fineuploader.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/fineuploader.min.js'); ?>"></script>
 <script>
     $(document).ready(function () {
         $('#jquery-wrapped-fine-uploader').fineUploader({

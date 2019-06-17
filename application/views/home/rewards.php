@@ -14,7 +14,7 @@
             </select>
         </div> <!-- /selector -->
         <div id="add-new" style="float: right; font-size: 13px;">
-            <img src="<?php echo base_url('assets/img/icon-add.png') ?>" alt="Icon" />
+            <img src="<?php echo base_url('/img/icon-add.png') ?>" alt="Icon" />
             <a id="add-new-trigger" href="javascript:void(0);">添加记录</a>
         </div> <!-- /add-new -->
     </div> <!-- /rewards-content-header -->
@@ -56,7 +56,7 @@
             <tbody></tbody>
         </table>
         <div id="new-record-trigger" style="padding-left: 8px; font-size: 13px;">
-            <img src="<?php echo base_url('assets/img/icon-add.png') ?>" alt="Icon" />
+            <img src="<?php echo base_url('/img/icon-add.png') ?>" alt="Icon" />
             <a id="new-record-trigger" href="javascript:void(0);">添加一行</a>
         </div> <!-- /new-record-trigger -->
     </div>

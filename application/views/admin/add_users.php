@@ -1,4 +1,4 @@
-<link href="<?php echo base_url('assets/css/fineuploader.min.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('/css/fineuploader.min.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <div id="add-users-header" class="page-header">
     <h1>添加用户</h1>
@@ -62,7 +62,7 @@
                     <form action="<?php echo base_url('admin/add_users'); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                         <table class="table no-border">
                             <tr class="no-border">
-                                <td><small><a href="<?php echo base_url('assets/tpl/template-users.xlsx'); ?>">查看文件模板</a></small></td>
+                                <td><small><a href="<?php echo base_url('/tpl/template-users.xlsx'); ?>">查看文件模板</a></small></td>
                             </tr>
                             <tr class="no-border">
                                 <td><div id="jquery-wrapped-fine-uploader"></div></td>
@@ -93,7 +93,7 @@
 </script>
 
 <!-- JavaScript for add a user tab -->
-<script type="text/javascript" src="<?php echo base_url('assets/js/placeholder.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/placeholder.min.js'); ?>"></script>
 <script type="text/javascript">$('input, textarea').placeholder();</script>
 <script type="text/javascript">
     function post_add_user_request() {
@@ -158,7 +158,7 @@
 </script>
 
 <!-- JavaScript for add users tab -->
-<script type="text/javascript" src="<?php echo base_url('assets/js/fineuploader.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/fineuploader.min.js'); ?>"></script>
 <script>
     $(document).ready(function () {
         $('#jquery-wrapped-fine-uploader').fineUploader({

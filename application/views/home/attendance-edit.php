@@ -1,4 +1,4 @@
-<link href="<?php echo base_url('assets/css/datetimepicker.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('/css/datetimepicker.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <div id="selector">
 	<select id="available-years" class="span2" disabled="disabled">
@@ -33,8 +33,8 @@
 </div> <!-- /list -->
 
 <!-- DateTime Packer -->
-<script type="text/javascript" src="<?php echo base_url('assets/js/datetimepicker.min.js'); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/js/datetimepicker.zh-CN.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/datetimepicker.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/datetimepicker.zh-CN.js'); ?>"></script>
 <script type="text/javascript">
     function initialize_datetimepicker() {
     	$('.form_datetime').datetimepicker({

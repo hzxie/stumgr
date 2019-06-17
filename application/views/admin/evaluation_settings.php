@@ -1,7 +1,7 @@
-<link href="<?php echo base_url('assets/css/admin/switchery.min.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
-<link href="<?php echo base_url('assets/css/admin/eveluation-settings.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('/css/admin/switchery.min.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('/css/admin/eveluation-settings.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
-<script type="text/javascript" src="<?php echo base_url('assets/js/switchery.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('/js/switchery.min.js'); ?>"></script>
 
 <div id="evaluation-settings-header" class="page-header">
     <h1>参数设置</h1>
