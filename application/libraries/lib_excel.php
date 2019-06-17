@@ -1,21 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH."/third_party/PHPExcel.php"; 
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 /**
- * The encapsulation of the PHPExcel Library.
+ * The encapsulation of the PhpSpreadsheet Library.
  * 
  * @author Haozhe Xie <cshzxie@gmail.com>
  */
-class Lib_excel extends PHPExcel { 
-	/**
-	 * The constructor of the class.
-	 */
-    public function __construct() 
-	{ 
-        parent::__construct();
-    }
-
+class Lib_excel { 
     /**
      * Get data from an excel file.
      * @param  String $file_path - the path of the excel file
@@ -24,22 +17,19 @@ class Lib_excel extends PHPExcel {
      */
     public function get_data_from_excel($file_path)
     {
-        if ( substr( $file_path, -3 ) == 'xls' ) {
-            $reader = PHPExcel_IOFactory::createReader( 'Excel5' );
-        } else {
-            $reader = PHPExcel_IOFactory::createReader( 'Excel2007' );
-        }
-        
-        $obj = $reader->load($file_path);
-        $sheet = $obj->getSheet(0); 
-        $number_of_rows = $sheet->getHighestRow();
-        $number_of_columns = PHPExcel_Cell::columnIndexFromString($sheet->getHighestColumn());
+        $reader = IOFactory::createReaderForFile($file_path);
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($file_path);
+        $worksheet = $spreadsheet->getActiveSheet(); 
+        $number_of_rows = $worksheet->getHighestRow();
+        $number_of_columns = Coordinate::columnIndexFromString(
+                                $worksheet->getHighestColumn());
 
         $data = array();
         for ( $row = 1; $row <= $number_of_rows; ++ $row ) {
-        	for ( $column = 0; $column < $number_of_columns; ++ $column ) {
-        		$columnName = PHPExcel_Cell::stringFromColumnIndex($column);
-        		$data[$row - 1][$column] = $sheet->getCellByColumnAndRow($column, $row)->getValue();
+        	for ( $column = 1; $column <= $number_of_columns; ++ $column ) {
+        		$columnName = Coordinate::stringFromColumnIndex($column);
+        		$data[$row - 1][$column - 1] = $worksheet->getCellByColumnAndRow($column, $row)->getValue();
         	}
         }
         return $data;

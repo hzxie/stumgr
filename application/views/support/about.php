@@ -78,7 +78,16 @@
                     <div class="page-header">
                         <h1>更新日志</h1>
                     </div>
-                    <div id="version-2.0">
+                    <div id="version-3.0">
+                        <h3>
+                            V 3.0 <small>(2019年06月17日)</small>
+                        </h3>
+                        <ul>
+                            <li>升级至Code Igniter 3.1</li>
+                            <li>支持PHP 7</li>
+                        </ul>
+                    </div> <!-- #version-3.0 -->
+                    <div id="version-2.2">
                         <h3>
                             V 2.2 <small>(2014年08月31日)</small>
                         </h3>
@@ -87,8 +96,8 @@
                             <li>完全兼容IE7浏览器</li>
                             <li>全新的响应式设计, 增强了移动终端的用户体验</li>
                         </ul>
-                    </div> <!-- #version-2.1 -->
-                    <div id="version-2.0">
+                    </div> <!-- #version-2.2 -->
+                    <div id="version-2.1">
                         <h3>
                             V 2.1 <small>(2013年09月30日)</small>
                         </h3>
