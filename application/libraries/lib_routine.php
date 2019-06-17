@@ -145,7 +145,7 @@ class Lib_routine {
      */
     private function get_all_available_years($available_years)
     {
-        $current_size        = count($available_years);
+        $current_size        = is_array($available_years) ? count($available_years) : 0;
         $current_school_year = $this->get_current_school_year();
 
         if ( !$this->__CI->lib_utils->in_array($available_years, 'school_year', $current_school_year) ) {
