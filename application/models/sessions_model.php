@@ -10,7 +10,7 @@
  *     last_activity		-- INT(10)		-- NOT NULL
  *     user_data			-- TEXT			-- NOT NULL
  *
- * @author	Xie Haozhe <zjhzxhz@gmail.com>
+ * @author	Haozhe Xie <cshzxie@gmail.com>
  */
 class Sessions_model extends CI_Model {
 	/**

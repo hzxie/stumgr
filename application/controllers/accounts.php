@@ -4,7 +4,7 @@
  * The class is used to handle user signin or 
  * signup request.
  *
- * @author: Xie Haozhe <zjhzxhz@gmail.com>
+ * @author: Haozhe Xie <cshzxie@gmail.com>
  */
 class Accounts extends CI_Controller {
 	/**

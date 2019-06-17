@@ -8,7 +8,7 @@
  *     course_name      -- VARCHAR(64)      -- NOT NULL
  *     credits          -- FLOAT            -- NOT NULL
  *
- * @author  Xie Haozhe <zjhzxhz@gmail.com>
+ * @author  Haozhe Xie <cshzxie@gmail.com>
  */
 class Courses_model extends CI_Model {
     /**

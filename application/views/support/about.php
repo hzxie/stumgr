@@ -28,7 +28,7 @@
         </div> <!-- #logo -->
         <?php if ( !isset($profile) ): ?>
             <div id="quick-login" class="offset4 span4">
-                <form class="form-inline" action="http://rjxy.hfut.edu.cn/stumgr/accounts/signin" method="post" accept-charset="utf-8">
+                <form class="form-inline" action="<?php echo base_url(); ?>accounts/signin" method="post" accept-charset="utf-8">
                     <input id="username" name="username" type="text" class="input-small" placeholder="用户名" maxlength="16">
                     <input id="password" name="password" type="password" class="input-small" placeholder="密码" maxlength="16">
                     <label id="remember" class="checkbox">
@@ -37,7 +37,7 @@
                     <button type="submit" class="btn btn-primary">登录</button>
                 </form>
             </div> <!-- #quick-login -->
-            <script type="text/javascript" src="<?php echo base_url().'assets/js/placeholder.min.js'; ?>"></script>
+            <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/placeholder.min.js"></script>
             <script type="text/javascript">$('input, textarea').placeholder();</script>
         <?php endif; ?>
     </div> <!-- #header -->

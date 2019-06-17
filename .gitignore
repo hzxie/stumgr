@@ -5,3 +5,4 @@ vendor/*
 */cache/!index.html
 */uploads/*
 .DS_Store
+composer.lock

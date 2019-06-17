@@ -5,7 +5,7 @@ require_once APPPATH."/third_party/PHPExcel.php";
 /**
  * The encapsulation of the PHPExcel Library.
  * 
- * @author Xie Haozhe <zjhzxhz@gmail.com>
+ * @author Haozhe Xie <cshzxie@gmail.com>
  */
 class Lib_excel extends PHPExcel { 
 	/**

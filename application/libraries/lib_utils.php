@@ -2,7 +2,7 @@
 
 /**
  * Utility class for the project.
- * @author: Xie Haozhe <zjhzxhz@gmail.com>
+ * @author: Haozhe Xie <cshzxie@gmail.com>
  */
 class Lib_utils {
     /**

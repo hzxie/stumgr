@@ -12,5 +12,5 @@
 	</div> <!-- /signup-button -->
 </div> <!-- /visitor-bar -->
 
-<script type="text/javascript" src="<?php echo base_url().'assets/js/placeholder.min.js'; ?>"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/placeholder.min.js"></script>
 <script type="text/javascript">$('input, textarea').placeholder();</script>

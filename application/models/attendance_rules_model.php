@@ -10,7 +10,7 @@
  *     description          -- VARCHAR(64)  -- NOT NULL
  *     additional_points    -- FLOAT        -- NOT NULL
  *
- * @author  Xie Haozhe <zjhzxhz@gmail.com>
+ * @author  Haozhe Xie <cshzxie@gmail.com>
  */
 class Attendance_rules_model extends CI_Model {
     /**

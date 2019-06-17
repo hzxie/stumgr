@@ -11,7 +11,7 @@
  *     description		-- VARCHAR(255)	-- NOT NULL
  *     additional_score	-- FLOAT		-- NOT NULL
  *
- * @author  Xie Haozhe <zjhzxhz@gmail.com>
+ * @author  Haozhe Xie <cshzxie@gmail.com>
  */
 class Rewards_model extends CI_Model {
     /**

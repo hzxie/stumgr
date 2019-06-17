@@ -4,7 +4,7 @@
  * The class handles all requests on uploading files.
  * It uses XMLHttpRequest to transfer files.
  * 
- * @author: Xie Haozhe <zjhzxhz@gmail.com>
+ * @author: Haozhe Xie <cshzxie@gmail.com>
  */
 class Lib_upload {
     /**

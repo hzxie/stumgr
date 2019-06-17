@@ -8,7 +8,7 @@
  *     group_name	-- VARCHAR(64)	-- NOT NULL --	[UNIQUE]
  *     display_name	-- VARCHAR(64)	-- NOT NULL
  *
- * @author	Xie Haozhe <zjhzxhz@gmail.com>
+ * @author	Haozhe Xie <cshzxie@gmail.com>
  */
 class User_groups_model extends CI_Model {
 	/**

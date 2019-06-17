@@ -10,7 +10,7 @@
  *     time             -- TIMESTAMP    -- NOT NULL --  [PRIMARY]
  *     rule_id          -- INT(2)       -- NOT NULL
  *
- * @author  Xie Haozhe <zjhzxhz@gmail.com>
+ * @author  Haozhe Xie <cshzxie@gmail.com>
  */
 class Attendance_model extends CI_Model {
     /**

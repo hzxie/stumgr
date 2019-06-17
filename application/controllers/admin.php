@@ -3,7 +3,7 @@
 /**
  * 系统的核心业务类. 管理员用户的Controller.
  * 
- * @author Xie Haozhe <zjhzxhz@gmail.com>
+ * @author Haozhe Xie <cshzxie@gmail.com>
  */
 class Admin extends CI_Controller {
     /**

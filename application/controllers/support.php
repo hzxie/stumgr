@@ -4,7 +4,7 @@
  * A class to handle and display help and support page.
  *
  * @date: August 4th, 2013
- * @author: Xie Haozhe <zjhzxhz@gmail.com>
+ * @author: Haozhe Xie <cshzxie@gmail.com>
  */
 class Support extends CI_Controller {
 	/**

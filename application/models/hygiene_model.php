@@ -11,7 +11,7 @@
  *     room             -- VARCHAR(8)   -- NOT NULL
  *     score            -- INT(4)
  *
- * @author  Xie Haozhe <zjhzxhz@gmail.com>
+ * @author  Haozhe Xie <cshzxie@gmail.com>
  */
 class Hygiene_model extends CI_Model {
     /**

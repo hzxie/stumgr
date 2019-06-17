@@ -2,7 +2,7 @@
 
 /**
  * The class handles all requests about accounts.
- * @author: Xie Haozhe <zjhzxhz@gmail.com>
+ * @author: Haozhe Xie <cshzxie@gmail.com>
  */
 class Lib_accounts {
     /**

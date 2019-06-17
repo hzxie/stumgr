@@ -20,7 +20,7 @@
  *     ability_medium       -- INT(4)       -- NOT NULL
  *     ability_poor         -- INT(4)       -- NOT NULL
  *
- * @author  Xie Haozhe <zjhzxhz@gmail.com>
+ * @author  Haozhe Xie <cshzxie@gmail.com>
  */
 class Assessment_model extends CI_Model {
     /**

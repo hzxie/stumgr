@@ -4,7 +4,7 @@
  * It is the CORE class of the system. It provides services
  * for students.
  * 
- * @author Xie Haozhe <zjhzxhz@gmail.com>
+ * @author Haozhe Xie <cshzxie@gmail.com>
  */
 class Home extends CI_Controller {
     /**

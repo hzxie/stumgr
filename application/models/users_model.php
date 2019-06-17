@@ -10,7 +10,7 @@
  *     last_time_signin				-- TIMESTAMP	-- NOT NULL
  *     last_time_change_password	-- TIMESTAMP	-- NOT NULL
  *
- * @author	Xie Haozhe <zjhzxhz@gmail.com>
+ * @author	Haozhe Xie <cshzxie@gmail.com>
  */
 class Users_model extends CI_Model {
 	/**

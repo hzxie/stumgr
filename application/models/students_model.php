@@ -12,7 +12,7 @@
  *     mobile				-- VARCHAR(12)
  *     email				-- VARCHAR(36)
  *
- * @author	Xie Haozhe <zjhzxhz@gmail.com>
+ * @author	Haozhe Xie <cshzxie@gmail.com>
  */
 class Students_model extends CI_Model {
 	/**

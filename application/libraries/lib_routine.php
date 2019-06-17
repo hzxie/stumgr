@@ -2,7 +2,7 @@
 
 /**
  * The class handles all requests about routine.
- * @author: Xie Haozhe <zjhzxhz@gmail.com>
+ * @author: Haozhe Xie <cshzxie@gmail.com>
  */
 class Lib_routine {
     /**

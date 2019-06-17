@@ -6,7 +6,7 @@
  * The structure of stumgr_scores:
  *     school_year      -- INT(4)       -- NOT NULL
  *
- * @author  Xie Haozhe <zjhzxhz@gmail.com>
+ * @author  Haozhe Xie <cshzxie@gmail.com>
  */
 class Scores_model extends CI_Model {
     /**

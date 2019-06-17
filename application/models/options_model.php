@@ -8,7 +8,7 @@
  *     option_name			-- VARCHAR(64)	-- NOT NULL --	[UNIQUE]
  *     options_value		-- VARCHAR(64)	-- NOT NULL
  *
- * @author	Xie Haozhe <zjhzxhz@gmail.com>
+ * @author	Haozhe Xie <cshzxie@gmail.com>
  */
 class Options_model extends CI_Model {
 	/**
