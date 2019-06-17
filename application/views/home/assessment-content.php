@@ -1,5 +1,5 @@
-<link rel="stylesheet" media="screen" href="<?php echo base_url(); ?>assets/css/home/messenger.css">
-<link rel="stylesheet" media="screen" href="<?php echo base_url(); ?>assets/css/home/messenger-theme-future.css">
+<link rel="stylesheet" media="screen" href="<?php echo base_url('assets/css/home/messenger.css'); ?>">
+<link rel="stylesheet" media="screen" href="<?php echo base_url('assets/css/home/messenger-theme-future.css'); ?>">
 
 <div class="alert alert-info">
     <?php
@@ -73,7 +73,7 @@
 <button id="submit" class="btn btn-primary" onclick="javascript:post_votes_request();" disabled="disabled">提交</button>
 <button class="btn btn-cancel" onclick="javascript:reset_options();">重置</button>
 
-<script src="<?php echo base_url(); ?>assets/js/messenger.min.js"></script> 
+<script src="<?php echo base_url('assets/js/messenger.min.js'); ?>"></script> 
 <script type="text/javascript">
     $._messengerDefaults = {
         extraClasses: 'messenger-fixed messenger-theme-future messenger-on-bottom messenger-on-right'
@@ -162,7 +162,7 @@
         $.ajax({
             type: 'POST',
             async: true,
-            url: "<?php echo base_url().'home/post_votes/'; ?>",
+            url: "<?php echo base_url('home/post_votes/'); ?>",
             data: post_data,
             dataType: 'JSON',
             success: function(result) {

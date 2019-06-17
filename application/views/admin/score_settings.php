@@ -1,4 +1,4 @@
-<link href="<?php echo base_url(); ?>assets/css/fineuploader.min.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('assets/css/fineuploader.min.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <div id="score-settings-header" class="page-header">
     <h1>参数设置</h1>
@@ -15,10 +15,10 @@
                 <h2>从Excel文件导入</h2>
             </div> <!-- /import-scores-header -->
             <div id="import-scores-section" style="overflow: hidden">
-                <form action="<?php echo base_url(); ?>admin/import_scores" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                <form action="<?php echo base_url('admin/import_scores'); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                     <table class="table no-border">
                         <tr class="no-border">
-                            <td><small><a href="<?php echo base_url().'assets/tpl/template-scores.xlsx'; ?>">查看文件模板</a></small></td>
+                            <td><small><a href="<?php echo base_url('assets/tpl/template-scores.xlsx'); ?>">查看文件模板</a></small></td>
                         </tr>
                         <tr class="no-border">
                             <td><div id="jquery-wrapped-fine-uploader"></div></td>
@@ -120,12 +120,12 @@
 </script>
 
 <!-- JavaScript for scores tab -->
-<script type="text/javascript" src="<?php echo base_url().'assets/js/fineuploader.min.js'; ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/fineuploader.min.js'); ?>"></script>
 <script>
     $(document).ready(function () {
         $('#jquery-wrapped-fine-uploader').fineUploader({
             request: {
-                endpoint: "<?php echo base_url(); ?>" + 'admin/import_scores/'
+                endpoint: "<?php echo base_url('admin/import_scores/'); ?>"
             },
             text: {
                 uploadButton: '上传文件'
@@ -151,7 +151,7 @@
         $.ajax({
             type: 'GET',
             async: false,
-            url: "<?php echo base_url().'admin/get_all_courses'; ?>",
+            url: "<?php echo base_url('admin/get_all_courses'); ?>",
             dataType: 'JSON',
             success: function(result) {
                 $('#all-courses-list').empty();
@@ -175,7 +175,7 @@
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/get_available_courses/'; ?>" + school_year + '/' + grade,
+            url: "<?php echo base_url('admin/get_available_courses/'); ?>" + school_year + '/' + grade,
             dataType: 'JSON',
             success: function(result) {
                 $('#selected-courses-list').empty();
@@ -228,7 +228,7 @@
                 $.ajax({
                     type: 'POST',
                     async: true,
-                    url: "<?php echo base_url().'admin/add_education_plan'; ?>",
+                    url: "<?php echo base_url('admin/add_education_plan'); ?>",
                     data: post_data,
                     dataType: 'JSON',
                     success: function(result) {
@@ -252,7 +252,7 @@
                 $.ajax({
                     type: 'POST',
                     async: true,
-                    url: "<?php echo base_url().'admin/delete_education_plan'; ?>",
+                    url: "<?php echo base_url('admin/delete_education_plan'); ?>",
                     data: post_data,
                     dataType: 'JSON',
                     success: function(result) {

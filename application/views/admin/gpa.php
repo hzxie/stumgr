@@ -37,7 +37,7 @@
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/get_gpa_records/'; ?>" + grade,
+            url: "<?php echo base_url('admin/get_gpa_records/'); ?>" + grade,
             dataType: 'JSON',
             success: function(result) {
                 console.log(result);

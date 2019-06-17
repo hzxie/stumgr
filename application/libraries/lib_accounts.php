@@ -127,9 +127,9 @@ class Lib_accounts {
     public function get_redirect_url($is_administrator)
     {
         if ( $is_administrator ) {
-            return base_url().'admin';
+            return base_url('admin');
         } else {
-            return base_url().'home';
+            return base_url('home');
         }
     }
 
@@ -581,7 +581,6 @@ class Lib_accounts {
         $is_successful &= $this->__CI->Assessment_model->delete($username);
 
         // TO DO: Delete other data in other tables which haven't create yet.
-
         return $is_successful;
     }
 

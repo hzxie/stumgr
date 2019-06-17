@@ -32,7 +32,7 @@ class Home extends CI_Controller {
 
         $session = $this->session->all_userdata();
         if ( !($session['is_logged_in'] && !$session['is_administrator']) ) {
-            redirect(base_url(). 'accounts');
+            redirect(base_url('accounts'));
         }
 
         $this->get_profile($session['username']);
@@ -84,8 +84,8 @@ class Home extends CI_Controller {
     public function index()
     {
         $navigator_item = array(
-            '欢迎'            => base_url().'home#welcome',
-            '账户'            => base_url().'home#profile'
+            '欢迎'            => base_url('home#welcome'),
+            '账户'            => base_url('home#profile')
         );
         $data = array( 
             'profile'           => $this->profile, 

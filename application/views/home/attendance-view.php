@@ -54,7 +54,7 @@
 		$.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'home/get_attendance_records/'; ?>" + year + '/' + time + '/' + range,
+            url: "<?php echo base_url('home/get_attendance_records/'); ?>" + year + '/' + time + '/' + range,
             dataType: 'JSON',
             success: function(result) {
             	$('#attendance-records tbody').empty();

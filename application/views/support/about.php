@@ -7,28 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="谢浩哲">
     <!-- Page Icon -->
-    <link rel="shortcut icon" href="http://rjxy.hfut.edu.cn/cms/wp-content/uploads/system-reserved/favicon.png" />
+    <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.png'); ?>" />
     <!-- CSS -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/support/style.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-responsive.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/support/style.css'); ?>">
     <!-- Java Script -->
-    <script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script> 
-    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script> 
+    <script src="<?php echo base_url('assets/js/jquery-1.11.0.min.js'); ?>"></script> 
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script> 
     <!--For IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-            <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+        <script src="<?php echo base_url('assets/js/html5shiv.min.js'); ?>"></script>
     <![endif]-->
 </head>
 
 <body data-spy="scroll" data-target="#sidebar">
     <div id="header" class="row-fluid">
         <div id="logo" class="span4">
-            <a href="<?php echo base_url(); ?>"><img id="logo" src="<?php echo base_url(); ?>assets/img/product-logo.png" alt="软件学院学生管理系统" /></a>
+            <a href="<?php echo base_url(); ?>"><img id="logo" src="<?php echo base_url('assets/img/product-logo.png'); ?>" alt="软件学院学生管理系统" /></a>
         </div> <!-- #logo -->
         <?php if ( !isset($profile) ): ?>
             <div id="quick-login" class="offset4 span4">
-                <form class="form-inline" action="<?php echo base_url(); ?>accounts/signin" method="post" accept-charset="utf-8">
+                <form class="form-inline" action="<?php echo base_url('accounts/signin'); ?>" method="post" accept-charset="utf-8">
                     <input id="username" name="username" type="text" class="input-small" placeholder="用户名" maxlength="16">
                     <input id="password" name="password" type="password" class="input-small" placeholder="密码" maxlength="16">
                     <label id="remember" class="checkbox">
@@ -37,7 +37,7 @@
                     <button type="submit" class="btn btn-primary">登录</button>
                 </form>
             </div> <!-- #quick-login -->
-            <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/placeholder.min.js"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/placeholder.min.js'); ?>"></script>
             <script type="text/javascript">$('input, textarea').placeholder();</script>
         <?php endif; ?>
     </div> <!-- #header -->

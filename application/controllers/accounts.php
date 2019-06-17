@@ -16,7 +16,7 @@ class Accounts extends CI_Controller {
         $this->load->library('lib_accounts');
 
         if ( !$this->is_browser_compatible() ) {
-        	redirect(base_url().'../not-supported/');
+        	redirect(base_url('../not-supported/'));
         }
     }
 
@@ -77,7 +77,7 @@ class Accounts extends CI_Controller {
 	public function signout()
 	{
 		$this->session->sess_destroy();
-		redirect(base_url(). 'accounts');
+		redirect(base_url('accounts'));
 	}
 }
 

@@ -85,7 +85,7 @@
         $.ajax({
             type: 'POST',
             async: true,
-            url: "<?php echo base_url(); ?>" + 'admin/change_password/',
+            url: "<?php echo base_url('admin/change_password/'); ?>",
             data: post_data,
             dataType: 'JSON',
             success: function(result) {

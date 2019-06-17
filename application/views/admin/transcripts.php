@@ -44,7 +44,7 @@
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/get_available_courses/'; ?>" + school_year + '/' + grade,
+            url: "<?php echo base_url('admin/get_available_courses/'); ?>" + school_year + '/' + grade,
             dataType: 'JSON',
             success: function(result) {
                 $('#available-courses').empty();
@@ -76,7 +76,7 @@
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/get_transcripts_records/'; ?>" + school_year + '/' + grade + '/' + course_id,
+            url: "<?php echo base_url('admin/get_transcripts_records/'); ?>" + school_year + '/' + grade + '/' + course_id,
             dataType: 'JSON',
             success: function(result) {
                 console.log(result);

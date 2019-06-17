@@ -84,8 +84,8 @@ class Support extends CI_Controller {
 			// ...
 		} else {
 			$navigator_item = array(
-				'欢迎' 			=> base_url().'home#welcome',
-				'账户'	 		=> base_url().'home#profile'
+				'欢迎' 			=> base_url('home#welcome'),
+				'账户'	 		=> base_url('home#profile')
 			);
 		}
 

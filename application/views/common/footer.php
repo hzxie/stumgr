@@ -5,7 +5,7 @@
 	<span id="help-and-support">
 		<ul class="inline">
 			<li><a href="#">帮助中心</a></li>
-			<li><a href="<?php echo base_url(); ?>support/about">关于我们</a></li>
+			<li><a href="<?php echo base_url('support/about'); ?>">关于我们</a></li>
 		</ul>
 	</span> <!-- /help-and-support -->
 </div> <!-- /footer -->

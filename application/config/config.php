@@ -27,6 +27,25 @@ $config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
+| CDN URL
+|--------------------------------------------------------------------------
+|
+| URL to your CDN Zone. Use your Zone URL or Zone Alias,
+| WITH a trailing slash:
+|
+|    http://examplepull-1a2b.kxcdn.com/
+|    http://cdn.example.com/
+|
+| WARNING: You MUST set this value to enable KeyCDN!
+|
+| If it is not set, then the extended URL Helper will use your default
+| Base Site URL instead.
+|
+*/
+$config['cdn_url'] = 'https://cdn.haozhexie.com/stumgr/';
+
+/*
+|--------------------------------------------------------------------------
 | Index File
 |--------------------------------------------------------------------------
 |
@@ -114,7 +133,7 @@ $config['enable_hooks'] = FALSE;
 | https://codeigniter.com/user_guide/general/creating_libraries.html
 |
 */
-$config['subclass_prefix'] = 'MY_';
+$config['subclass_prefix'] = 'ext_';
 
 /*
 |--------------------------------------------------------------------------

@@ -64,7 +64,7 @@
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'home/get_evaluation_records/'; ?>" + school_year,
+            url: "<?php echo base_url('home/get_evaluation_records/'); ?>" + school_year,
             dataType: 'JSON',
             success: function(result) {
                 console.log(result);

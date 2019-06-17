@@ -1,4 +1,4 @@
-<link href="<?php echo base_url(); ?>assets/css/datetimepicker.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('assets/css/datetimepicker.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <div id="attendance-header" class="page-header">
 	<h1>考勤情况</h1>
@@ -92,8 +92,8 @@
 
 
 <!-- DateTime Packer -->
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/datetimepicker.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/datetimepicker.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/datetimepicker.zh-CN.js'); ?>"></script>
 <script type="text/javascript">
     $('.form_datetime').datetimepicker({
         language:  'zh-CN',
@@ -146,7 +146,7 @@
 		$.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/get_attendance_records/'; ?>" + year + '/' + grade + '/' + time,
+            url: "<?php echo base_url('admin/get_attendance_records/'); ?>" + year + '/' + grade + '/' + time,
             dataType: 'JSON',
             success: function(result) {
             	$('#attendance-records tbody').empty();
@@ -268,7 +268,7 @@
 		$.ajax({
             type: 'POST',
             async: false,
-            url: "<?php echo base_url(); ?>" + 'admin/edit_attendance_records/',
+            url: "<?php echo base_url('admin/edit_attendance_records/'); ?>",
             data: post_data,
             dataType: 'JSON',
             success: function(result) {
@@ -338,7 +338,7 @@
 		$.ajax({
             type: 'POST',
             async: false,
-            url: "<?php echo base_url(); ?>" + 'admin/delete_attendance_records/',
+            url: "<?php echo base_url('admin/delete_attendance_records/'); ?>",
             data: post_data,
             dataType: 'JSON',
             success: function(result) {

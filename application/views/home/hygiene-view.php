@@ -32,7 +32,7 @@
 		$.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'home/get_hygiene_records/'; ?>" + year + '/' + time,
+            url: "<?php echo base_url('home/get_hygiene_records/'); ?>" + year + '/' + time,
             dataType: 'JSON',
             success: function(result) {
             	$('#hygiene-records tbody').empty();

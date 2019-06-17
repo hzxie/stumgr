@@ -49,7 +49,7 @@
 		$.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/get_students_profile_list/'; ?>" + grade,
+            url: "<?php echo base_url('admin/get_students_profile_list/'); ?>" + grade,
             dataType: 'JSON',
             success: function(result) {
                 $('#students-list tbody').empty();
@@ -195,7 +195,7 @@
 		$.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/get_user_profile/'; ?>" + student_id,
+            url: "<?php echo base_url('admin/get_user_profile/'); ?>" + student_id,
             dataType: 'JSON',
             success: function(data) {
                 $('label[name="student_id"]').text(data['student_id']);
@@ -230,7 +230,7 @@
 		$.ajax({
             type: 'POST',
             async: true,
-            url: "<?php echo base_url().'admin/edit_user_profile/'; ?>" + student_id,
+            url: "<?php echo base_url('admin/edit_user_profile/'); ?>" + student_id,
             data: post_data,
             dataType: 'JSON',
             success: function(result) {
@@ -317,7 +317,7 @@
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/delete_account/'; ?>" + student_id,
+            url: "<?php echo base_url('admin/delete_account/'); ?>" + student_id,
             dataType: 'JSON',
             success: function(result) {
                 if ( result['is_successful'] ) {
@@ -348,7 +348,7 @@
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'admin/delete_accounts/'; ?>" + grade,
+            url: "<?php echo base_url('admin/delete_accounts/'); ?>" + grade,
             dataType: 'JSON',
             success: function(result) {
                 if ( result['is_successful'] ) {

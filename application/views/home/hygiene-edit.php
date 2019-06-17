@@ -1,4 +1,4 @@
-<link href="<?php echo base_url(); ?>assets/css/datetimepicker.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('assets/css/datetimepicker.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <div id="selector">
 	<select id="available-years" class="span2" disabled="disabled">
@@ -39,7 +39,7 @@
 			$.ajax({
 	            type: 'GET',
 	            async: false,
-	            url: "<?php echo base_url().'home/get_extra_hygiene_data_for_administration'; ?>",
+	            url: "<?php echo base_url('home/get_extra_hygiene_data_for_administration'); ?>",
 	            dataType: 'JSON',
 	            success: function(data) {
 	            	extra_data = data;

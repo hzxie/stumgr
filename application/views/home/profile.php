@@ -148,7 +148,7 @@
         $.ajax({
             type: 'POST',
             async: true,
-            url: "<?php echo base_url(); ?>" + 'home/edit_profile/',
+            url: "<?php echo base_url('home/edit_profile/'); ?>",
             data: post_data,
             dataType: 'JSON',
             success: function(result) {
@@ -190,7 +190,7 @@
         $.ajax({
             type: 'POST',
             async: true,
-            url: "<?php echo base_url(); ?>" + 'home/change_password/',
+            url: "<?php echo base_url('home/change_password/'); ?>",
             data: post_data,
             dataType: 'JSON',
             success: function(result) {

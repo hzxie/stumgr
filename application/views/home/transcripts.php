@@ -53,7 +53,7 @@
         $.ajax({
             type: 'GET',
             async: true,
-            url: "<?php echo base_url().'home/get_transcripts_records/'; ?>" + school_year + '/' + semester,
+            url: "<?php echo base_url('home/get_transcripts_records/'); ?>" + school_year + '/' + semester,
             dataType: 'JSON',
             success: function(result) {
                 $('#transcripts-records tbody').empty();

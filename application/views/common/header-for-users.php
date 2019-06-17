@@ -8,12 +8,12 @@
 	</ul>
 </div> <!-- /nav-bar -->
 <div id="user-bar">
-	<img id="logo" src="<?php echo base_url(); ?>assets/img/product-logo.png" alt="软件学院学生管理系统" />
+	<img id="logo" src="<?php echo base_url('assets/img/product-logo.png'); ?>" alt="软件学院学生管理系统" />
 	<div id="user">
 		<a id="profile-trigger" href="javascript:void(0)"><ul class="inline">
 			<li><?php echo ( isset($profile) ? $profile['display_name'] : 'Unknown' ); ?></li>
 			<li>
-				<span id="gravatar-small"><img src="<?php echo base_url(); ?>assets/img/gravatar.png" alt="gravatar" /></span>
+				<span id="gravatar-small"><img src="<?php echo base_url('assets/img/gravatar.png'); ?>" alt="gravatar" /></span>
 				<span id="scroll-down-button"></span>
 			</li>
 		</ul></a>
@@ -23,25 +23,20 @@
 		<span id="arrow-shadow"></span>
 		<div id="brief-profile">
 			<div id="gravatar-large">
-				<img src="<?php echo base_url(); ?>assets/img/gravatar.png" alt="gravatar" />
+				<img src="<?php echo base_url('assets/img/gravatar.png'); ?>" alt="gravatar" />
 			</div> <!-- gravatar-large -->
 			<div id="profile-info">
 				<div id="user-info">
 					<span id="display-name"><?php echo ( isset($profile) ? $profile['display_name'] : 'Unknown' ); ?></span>
 					<span id="username"><?php echo ( isset($profile) ? $profile['username'] : 'Unknown' ); ?></span>
 				</div>
-				<button class="btn btn-primary" onclick="javascript:window.location.href='<?php 
-							if ( $profile['is_administrator'] ) {
-								echo base_url().'admin#profile';
-							} else {
-								echo base_url().'home#profile';
-							} 
-						?>'">查看个人资料</button>
+				<?php $dashboard_url = $profile['is_administrator'] ? base_url('admin') : base_url('home'); ?>
+				<button class="btn btn-primary" onclick="javascript:window.location.href='<?php echo $dashboard_url; ?>#profile'">查看个人资料</button>
 			</div> <!-- /profile-info -->
 		</div> <!-- /brief-profile -->
 		<div id="sign-out">
 			<button class="btn" 
-					onclick="javascript:window.location.href='<?php echo base_url(); ?>accounts/signout'">退出</button>
+					onclick="javascript:window.location.href='<?php echo base_url('accounts/signout'); ?>'">退出</button>
 		</div> <!-- /sign-out -->
 	</div> <!-- /profile -->
 </div> <!-- /user-bar -->

@@ -6,30 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Page Icon -->
-    <link rel="shortcut icon" href="http://rjxy.hfut.edu.cn/cms/wp-content/uploads/system-reserved/favicon.png" />
+    <link rel="shortcut icon" href="<?php echo base_url('assets/img/favicon.png'); ?>" />
     <!-- CSS -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/accounts/signin.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-responsive.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/accounts/signin.css'); ?>">
     <!-- Java Script -->
-    <script src="<?php echo base_url(); ?>assets/js/jquery-1.11.0.min.js"></script>
+    <script src="<?php echo base_url('assets/js/jquery-1.11.0.min.js'); ?>"></script>
 </head>
 
 <body>
     <div id="header">
-        <img id="logo" src="<?php echo base_url(); ?>assets/img/product-logo.png" alt="软件学院学生管理系统" />
+        <img id="logo" src="<?php echo base_url('assets/img/product-logo.png'); ?>" alt="软件学院学生管理系统" />
         <span id="signup-button">
             <button id="signup" class="btn btn-danger">创建新账户</button>
         </span> <!-- #signup-button -->
     </div> <!-- #header -->
     <div id="content" class="row-fluid">
         <div id="introduction" class="span6">
-            <img src="<?php echo base_url(); ?>assets/img/bg.png" />
+            <img src="<?php echo base_url('assets/img/bg.png'); ?>" />
         </div> <!-- #introduction -->
         <div id="signin-container" class="span6">
             <div id="signin-box">
                 <h2>用户登录</h2>
-                <form id="signin-form" action="<?php echo base_url(); ?>accounts/signin" method="post" accept-charset="utf-8">
+                <form id="signin-form" action="<?php echo base_url('accounts/signin'); ?>" method="post" accept-charset="utf-8">
                     <div id="username-div">
                         <label for="username"><strong>用户名</strong></label>
                         <input type="text" id="username" name="username" maxlength="16" 

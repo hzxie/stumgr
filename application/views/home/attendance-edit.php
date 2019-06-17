@@ -1,4 +1,4 @@
-<link href="<?php echo base_url(); ?>assets/css/datetimepicker.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('assets/css/datetimepicker.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
 
 <div id="selector">
 	<select id="available-years" class="span2" disabled="disabled">
@@ -33,8 +33,8 @@
 </div> <!-- /list -->
 
 <!-- DateTime Packer -->
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/datetimepicker.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/datetimepicker.min.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/datetimepicker.zh-CN.js'); ?>"></script>
 <script type="text/javascript">
     function initialize_datetimepicker() {
     	$('.form_datetime').datetimepicker({
@@ -58,7 +58,7 @@
 			$.ajax({
 	            type: 'GET',
 	            async: false,
-	            url: "<?php echo base_url().'home/get_extra_attendance_data_for_administration'; ?>",
+	            url: "<?php echo base_url('home/get_extra_attendance_data_for_administration'); ?>",
 	            dataType: 'JSON',
 	            success: function(data) {
 	            	extra_data = data;
@@ -206,7 +206,7 @@
 		$.ajax({
             type: 'POST',
             async: false,
-            url: "<?php echo base_url(); ?>" + 'home/add_attendance_record/',
+            url: "<?php echo base_url('home/add_attendance_record/'); ?>",
             data: post_data,
             dataType: 'JSON',
             success: function(result) {
