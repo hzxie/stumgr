@@ -29,7 +29,7 @@ class Sessions_model extends CI_Model {
 	 */
 	public function is_valid($session_id)
 	{
-		$this->db->where('session_id', $session_id);
+		$this->db->where('id', $session_id);
 
 		$query = $this->db->get( $this->db->dbprefix('sessions') );
 		if ( $query->num_rows() > 0 ) {
