@@ -6,7 +6,7 @@
 | Overwrite the base_url function to support
 | loading designated content from KeyCDN.
 */
-function base_url($uri)
+function base_url($uri='')
 {
     $current_instance =& get_instance();
     $cdn_url = $current_instance->config->item('cdn_url');
